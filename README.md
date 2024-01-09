@@ -1,4 +1,9 @@
 # 42_get_next_line WIP!!
+
+<p align="center">
+    <img src="https://github.com/alx-sch/42_get_next_line/assets/134595144/4c3cadb7-0375-4908-a67a-a90bd865ea6d" alt="libft" />
+</p>
+
 Function to read lines from a file descriptor one-by-one using static variables.
 
 

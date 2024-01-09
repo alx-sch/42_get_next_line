@@ -2,7 +2,7 @@
 Function to read lines from a file descriptor one-by-one using static variables.
 
 
-# Why using linked lists?
+## Why using linked lists?
 Using linked lists offers several advantages:
 
 Dynamic Memory Management:

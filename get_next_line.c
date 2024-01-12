@@ -169,9 +169,10 @@ int	main(void)
 
 	line_nr = 1;
 
-	fd = open("test_1.txt", O_RDONLY);
-	// close(fd); 
+	fd = open("test_files/test_1.txt", O_RDONLY);
+	// close(fd); // Uncomment for testing below
 	// fd = 0; // Uncomment to test input via standard input
+        // fd = open("test_files/test_binary_data.png", O_RDONLY) // Uncomment to test handling of binary data
 
 	line = get_next_line(fd);
 	printf("line %d-->%s\n", line_nr++, line);

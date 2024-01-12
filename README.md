@@ -37,6 +37,11 @@ In Summary, the use of linked lists allows for a more flexible and efficient han
 ## Binary File   
 A binary file is a file that contains information in a format that is not composed of readable characters. 
 Examples of binary files include executable files (e.g., .exe), image files (e.g., .jpg, .png), audio files (e.g., .mp3), and many others
+```bash
+�=ѧ�?k`m�N+�f�|�x�f��V�����x��v=]���BEUg#D
+֡�z���� =��ʵ���U|��gHt>ײ�����D�[���ɟ�9ѧ{B��X�o_���q��7=��꼋��ڏ��
+@�^���Jǋ���S}'��N��Yk���        &걋9���Г��V��*�_�����Lь��P
+```
 
 ## Reading standardinput:
 - fd = 0 -> prompted to input text when calling program -> multiline not trivial -> you can copy and past this, for example, run the testing program and paste a multiline input, e.g. this one:

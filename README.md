@@ -33,3 +33,25 @@ Adaptability to Different Data Sources:
 Linked lists provide flexibility, making it easier to adapt the get_next_line function to different data sources. Whether reading from a file, a socket, or any other stream, the linked list structure can be adapted to handle various scenarios.
 
 In Summary, the use of linked lists allows for a more flexible and efficient handling of lines of text with varying lengths and dynamic memory allocation needs.
+
+## Binary File   
+A binary file is a file that contains information in a format that is not composed of readable characters. 
+Examples of binary files include executable files (e.g., .exe), image files (e.g., .jpg, .png), audio files (e.g., .mp3), and many others
+
+## Reading standardinput:
+- fd = 0 -> prompted to input text when calling program -> multiline not trivial -> you can copy and past this, for example, run the testing program and paste a multiline input, e.g. this one:
+```bash
+This is the first line.
+This is the second line.
+And the last! EOF
+```
+
+or through piping
+
+```bash
+./a.out < input.txt
+```
+
+```bash
+echo "First line\nThis is the second one\nAnd third!" | ./a.out
+```

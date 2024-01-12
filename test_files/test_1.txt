@@ -1,0 +1,3 @@
+This is the first line: Yes!
+And this is the second line: Yeah!
+Here we go, third line: EOF

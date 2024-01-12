@@ -161,6 +161,7 @@ char	*get_next_line(int fd)
 #include <stdio.h>
 #include <fcntl.h>
 
+// Test: Reading from file and standard input & Handling of binary data
 int	main(void)
 {
 	int		fd;
@@ -171,7 +172,7 @@ int	main(void)
 
 	fd = open("test_files/test_1.txt", O_RDONLY);
 	// close(fd); // Uncomment for testing below
-	// fd = 0; // Uncomment to test input via standard input
+	// fd = 0; // Uncomment to test reading from standard input
         // fd = open("test_files/test_binary_data.png", O_RDONLY) // Uncomment to test handling of binary data
 
 	line = get_next_line(fd);

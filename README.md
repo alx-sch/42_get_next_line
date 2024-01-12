@@ -41,7 +41,7 @@ Examples of binary files include executable files (e.g., .exe), image files (e.g
 ## Reading standardinput:
 - fd = 0 -> prompted to input text when calling program -> multiline not trivial -> you can copy and past this, for example:
 ```bash
-./a.out
+./a.out [run and then paste multline input, e.g. the one below]
 This is the first line.
 This is the second line.
 Press Enter again to submit another line.

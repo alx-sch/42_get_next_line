@@ -165,7 +165,7 @@ char	*get_next_line(int fd)
 #include <stdio.h>
 #include <fcntl.h>
 
-// Testing reading from a file or standard input
+// Test: Handling Multiple File Descriptors at the same time
 int	main(void)
 {
 	int		fd_1;

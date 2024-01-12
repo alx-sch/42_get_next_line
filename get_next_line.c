@@ -170,8 +170,8 @@ int	main(void)
 	line_nr = 1;
 
 	fd = open("test_1.txt", O_RDONLY);
-	close(fd);
-	fd = 0; // fd for standard input
+	// close(fd); 
+	// fd = 0; // Uncomment to test input via standard input
 
 	line = get_next_line(fd);
 	printf("line %d-->%s\n", line_nr++, line);

@@ -180,9 +180,9 @@ int	main(void)
 	line_nr_2 = 1;
 	line_nr_3 = 1;
 
-	fd_1 = open("test_1.txt", O_RDONLY);
-	fd_2 = open("test_2.txt", O_RDONLY);
-	fd_3 = open("test_3.txt", O_RDONLY);
+	fd_1 = open("test_files/test_1.txt", O_RDONLY);
+	fd_2 = open("test_files/test_2.txt", O_RDONLY);
+	fd_3 = open("test_files/test_3.txt", O_RDONLY);
 
 	line = get_next_line(fd_1);
 	printf("line %d-->%s\n", line_nr_1++, line);

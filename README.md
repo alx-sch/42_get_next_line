@@ -47,8 +47,12 @@ This is the second line.
 Press Enter again to submit another line.
 ```
 
-or 
+or through piping
 
 ```bash
 ./a.out < input.txt
+```
+
+```bash
+echo "First line\nThis is the second one\nAnd third!" | ./a.out
 ```

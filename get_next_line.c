@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:36 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/12 11:50:55 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:02:45 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int	ft_isprint(int c)
+{
+	if (c >= 32 && c <= 126)
+		return (1);
+	else
+		return (0);
+}
 
 /*
 Extracts a content from the input string ('stash') until the first newline
@@ -101,25 +109,45 @@ A complete line (meaning until '\n' or EOF) is extracted from the
 'stash'. Afterwards, the 'stash' is trimmed so it only containts content after
 the newline character, which will be stored and used in the next function call.
 
+To handle the reading of binary data in a more controlled way, get_next_line()
+checks the data input for non-printable characters and NULL terminators not
+followed by another NULL terminator, which indicates an EOF. If the binary data
+check was successful (i.e., if non-printable characters or a single NULL
+terminator were found without an EOF indication), the function returns NULL.
+
 Parameters:
 	- fd: File descriptor representing the file to read from.
 
 Returns:
 	- If successful, returns a dynamically allocated string containing the
 	  next line from the file ('line').
-	- If an error occurs or if the EOF is reached, returns NULL.
+	- If an error occurs, if the EOF is reached or if file is binary,
+	  NULL is returned.
 */
 
 char	*get_next_line(int fd)
 {
 	char		*line;
 	static char	*stash;
+	size_t		i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash = ft_read_until_newline_or_eof(fd, stash);
 	if (!stash)
 		return (NULL);
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+	{
+		if (stash[i] == '\0' || !ft_isprint(stash[i]))
+		{
+			if (stash[i] == '\0' && stash[i + 1] == '\0')
+				break ;
+			else
+				return (NULL);
+		}
+		i++;
+	}
 	line = ft_extract_line(stash);
 	stash = ft_trim_until_newline(stash);
 	return (line);
@@ -136,19 +164,25 @@ int	main(void)
 	int		line_nr;
 
 	line_nr = 1;
+
 	fd = open("test_1.txt", O_RDONLY);
+	close(fd);
+	fd = 0; // fd for standard input
 
 	line = get_next_line(fd);
-	printf("-->%s\n", line);
+	printf("line %d-->%s\n", line_nr++, line);
 
 	line = get_next_line(fd);
-	printf("-->%s\n", line);
+	printf("line %d-->%s\n", line_nr++, line);
 
 	line = get_next_line(fd);
-	printf("-->%s\n", line);
+	printf("line %d-->%s\n", line_nr++, line);
 
 	line = get_next_line(fd);
-	printf("-->%s\n", line);
+	printf("line %d-->%s\n", line_nr++, line);
+
+	line = get_next_line(fd);
+	printf("line %d-->%s\n", line_nr++, line);
 
 	close(fd);
 	return (0);

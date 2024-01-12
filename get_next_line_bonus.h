@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:24 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/11 17:18:53 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:19:31 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 // Default value of 10 for BUFFER_SIZE if not defined during compilation
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
+# endif
+
+// Default value of 256 for available file descriptors.
+// You can check the actually number via 'cat /proc/sys/fs/file-max'
+// It is '9223372036854775807' on  my system!
+// As it is a stretch to allocate an array with this amount of entries, but if
+// need be, you can easily adjust while compiling via the '-D FD_LIMIT=n' flag.
+# ifndef FD_LIMIT
+#  define FD_LIMIT 256
 # endif
 
 # include <stdlib.h> // malloc(), free()

@@ -6,12 +6,16 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:36 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/12 19:20:37 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:43:54 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/*
+As included in the libft project/library.
+Used for non-binary data check in get_next_line().
+*/
 int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)
@@ -164,31 +168,79 @@ char	*get_next_line(int fd)
 // Testing reading from a file or standard input
 int	main(void)
 {
-	int		fd;
+	int		fd_1;
+	int		fd_2;
+	int		fd_3;
 	char	*line;
-	int		line_nr;
+	int		line_nr_1;
+	int		line_nr_2;
+	int		line_nr_3;
 
-	line_nr = 1;
+	line_nr_1 = 1;
+	line_nr_2 = 1;
+	line_nr_3 = 1;
 
-	fd = open("test_1.txt", O_RDONLY);
-	// fd = 0; // fd for standard input
+	fd_1 = open("test_1.txt", O_RDONLY);
+	fd_2 = open("test_2.txt", O_RDONLY);
+	fd_3 = open("test_3.txt", O_RDONLY);
 
-	line = get_next_line(fd);
-	printf("line %d-->%s\n", line_nr++, line);
+	line = get_next_line(fd_1);
+	printf("line %d-->%s\n", line_nr_1++, line);
 
-	line = get_next_line(fd);
-	printf("line %d-->%s\n", line_nr++, line);
+	line = get_next_line(fd_2);
+	printf("line %d-->%s\n", line_nr_2++, line);
 
-	line = get_next_line(fd);
-	printf("line %d-->%s\n", line_nr++, line);
+	line = get_next_line(fd_3);
+	printf("line %d-->%s\n", line_nr_3++, line);
 
-	line = get_next_line(fd);
-	printf("line %d-->%s\n", line_nr++, line);
+	line = get_next_line(fd_1);
+	printf("line %d-->%s\n", line_nr_1++, line);
 
-	line = get_next_line(fd);
-	printf("line %d-->%s\n", line_nr++, line);
+	line = get_next_line(fd_2);
+	printf("line %d-->%s\n", line_nr_2++, line);
 
-	close(fd);
+	line = get_next_line(fd_3);
+	printf("line %d-->%s\n", line_nr_3++, line);
+
+	line = get_next_line(fd_1);
+	printf("line %d-->%s\n", line_nr_1++, line);
+
+	line = get_next_line(fd_2);
+	printf("line %d-->%s\n", line_nr_2++, line);
+
+	line = get_next_line(fd_3);
+	printf("line %d-->%s\n", line_nr_3++, line);
+
+	line = get_next_line(fd_1);
+	printf("line %d-->%s\n", line_nr_1++, line);
+
+	line = get_next_line(fd_2);
+	printf("line %d-->%s\n", line_nr_2++, line);
+
+	line = get_next_line(fd_3);
+	printf("line %d-->%s\n", line_nr_3++, line);
+
+	line = get_next_line(fd_1);
+	printf("line %d-->%s\n", line_nr_1++, line);
+
+	line = get_next_line(fd_2);
+	printf("line %d-->%s\n", line_nr_2++, line);
+
+	line = get_next_line(fd_3);
+	printf("line %d-->%s\n", line_nr_3++, line);
+
+	line = get_next_line(fd_1);
+	printf("line %d-->%s\n", line_nr_1++, line);
+
+	line = get_next_line(fd_2);
+	printf("line %d-->%s\n", line_nr_2++, line);
+
+	line = get_next_line(fd_3);
+	printf("line %d-->%s\n", line_nr_3++, line);
+
+	close(fd_1);
+	close(fd_2);
+	close(fd_3);
 	return (0);
 }
 */

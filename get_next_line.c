@@ -6,12 +6,16 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:36 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/12 19:02:45 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:43:46 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/*
+As included in the libft project/library.
+Used for non-binary data check in get_next_line().
+*/
 int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)

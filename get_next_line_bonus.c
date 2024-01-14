@@ -25,9 +25,9 @@ int	ft_isprint(int c)
 }
 
 /*
-Extracts a content from the input string ('stash') until the first newline
+Extracts content from the input string ('stash') until the first newline
 character, so one line. Allocates memory for the extracted line, including the
-newline character if present and returns extracted line as string.
+newline character if present, and returns extracted line as string.
 Returns NULL if 'stash' is empty.
 */
 char	*ft_extract_line(char *stash)
@@ -107,29 +107,31 @@ again (or NULL when the EOF ('\0') was reached).
 
 Read data is appended to a string ('stash') until either a newline character
 or the EOF is encountered. This 'stash' is maintained as static storage,
-which accumulates reads between function calls (size of reads is defined by
-BUFFER_SIZE).
+which accumulates reads between function calls (the size of reads is defined 
+by BUFFER_SIZE).
 A complete line (meaning until '\n' or EOF) is extracted from the
-'stash'. Afterwards, the 'stash' is trimmed so it only containts content after
+'stash'. Afterward, the 'stash' is trimmed so it only contains content after
 the newline character, which will be stored and used in the next function call.
 
 To handle the reading of binary data in a more controlled way, get_next_line()
 checks the data input for non-printable characters and NULL terminators not
 followed by another NULL terminator, which indicates an EOF. If the binary data
-check was successful (i.e., if non-printable characters or a single NULL
-terminator were found without an EOF indication), the function returns NULL.
+the check was successful (i.e. if non-printable characters or a single NULL
+terminator was found without an EOF indication), the function returns NULL.
 
 Manages multiple file descriptors at the same time by declaring 'stash' as a
-pointer to an array of characters (before: pointer to a single char). This way,
+pointer to an array of characters (before pointer to a single char). This way,
 'stash' can hold multiple character pointers (one for each file descriptor).
+The default value for the max. number of file descriptors is defined in the
+header file but can be adjusted while compiling using the '-D FD_LIMIT=n' flag.
 
 Parameters:
-	- fd: File descriptor representing the file to read from.
+	- int fd: File descriptor representing the file to read from.
 
 Returns:
 	- If successful, returns a dynamically allocated string containing the
 	  next line from the file ('line').
-	- If an error occurs, if the EOF is reached or if file is binary,
+	- If an error occurs, if the EOF is reached, or if the file is binary,
 	  NULL is returned.
 */
 

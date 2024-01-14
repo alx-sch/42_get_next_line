@@ -116,7 +116,7 @@ the newline character, which will be stored and used in the next function call.
 To handle the reading of binary data in a more controlled way, get_next_line()
 checks the data input for non-printable characters and NULL terminators not
 followed by another NULL terminator, which indicates an EOF. If the binary data
-the check was successful (i.e. if non-printable characters or a single NULL
+check was successful (i.e. if non-printable characters or a single NULL
 terminator was found without an EOF indication), the function returns NULL.
 
 Manages multiple file descriptors at the same time by declaring 'stash' as a

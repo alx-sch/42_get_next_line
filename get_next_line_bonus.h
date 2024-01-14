@@ -19,10 +19,10 @@
 # endif
 
 // Default value of 256 for available file descriptors.
-// You can check the actual number via 'cat /proc/sys/fs/file-max'
-// It is a staggering '9223372036854775807' on my system!
+// You can check the actual number via 'cat /proc/sys/fs/file-max';
+// it's a staggering '9223372036854775807' on my system!
 // It is a stretch to allocate an array with this amount of entries, but if
-// need be, you can easily adjust while compiling via the '-D FD_LIMIT=n' flag.
+// need be, you can easily adjust while compiling via the '-D FD_SIZE_=n' flag.
 # ifndef FD_SIZE
 #  define FD_SIZE 256
 # endif

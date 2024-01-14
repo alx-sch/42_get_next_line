@@ -23,8 +23,8 @@
 // It is '9223372036854775807' on  my system!
 // As it is a stretch to allocate an array with this amount of entries, but if
 // need be, you can easily adjust while compiling via the '-D FD_LIMIT=n' flag.
-# ifndef FD_LIMIT
-#  define FD_LIMIT 256
+# ifndef FD_SIZE
+#  define FD_SIZE 256
 # endif
 
 # include <stdlib.h> // malloc(), free()

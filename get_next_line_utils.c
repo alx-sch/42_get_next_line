@@ -114,8 +114,8 @@ char	*ft_strchr(const char *s, int c)
 Removes the content of the input string ('stash') from the start until
 the first newline char by copying the content of 'stash' after '\n' into
 a new string and frees memory allocated for 'stash'.
-If there is no '\n' in 'stash', it frees memory allocated for 'stash' and
-returns NULL.
+If there is no '\n' in 'stash' or the EOF was reached, it frees memory
+allocated for 'stash' and returns NULL.
 */
 char	*ft_trim_until_newline(char *stash)
 {

@@ -123,7 +123,7 @@ Manages multiple file descriptors at the same time by declaring 'stash' as a
 pointer to an array of characters (before pointer to a single char). This way,
 'stash' can hold multiple character pointers (one for each file descriptor).
 The default value for the max. number of file descriptors is defined in the
-header file but can be adjusted while compiling using the '-D FD_LIMIT=n' flag.
+header file but can be adjusted while compiling using the '-D FD_SIZE=n' flag.
 
 Parameters:
 	- int fd: File descriptor representing the file to read from.
@@ -138,7 +138,7 @@ Returns:
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*stash[FD_LIMIT];
+	static char	*stash[FD_SIZE];
 	size_t		i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)

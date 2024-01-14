@@ -92,8 +92,8 @@ char	*ft_stash_buf_join(char *stash, char *buffer)
 
 /*
 As included in the libft project/library.
-Finds specific character in a string and returns pointer pointing to its first
-occurence, returns NULL if character is not found.
+Finds a specific character in a string and returns a pointer pointing to its first
+occurrence; returns NULL if the character is not found.
 */
 char	*ft_strchr(const char *s, int c)
 {

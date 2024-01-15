@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:24 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/12 18:16:24 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/15 12:11:34 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <stdlib.h> // malloc(), free()
 # include <unistd.h> // read()
 # include <stddef.h> // size_t
-# include <ctype.h>
 
 char	*ft_stash_buf_join(char *stash, char *buffer);
 char	*ft_strchr(const char *s, int c);

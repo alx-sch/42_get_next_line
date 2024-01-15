@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:36 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/12 19:43:54 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/15 12:42:57 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ again (or NULL when the EOF ('\0') was reached).
 
 Read data is appended to a string ('stash') until either a newline character
 or the EOF is encountered. This 'stash' is maintained as static storage,
-which accumulates reads between function calls (the size of reads is defined 
+which accumulates reads between function calls (the size of reads is defined
 by BUFFER_SIZE).
 A complete line (meaning until '\n' or EOF) is extracted from the
 'stash'. Afterward, the 'stash' is trimmed so it only contains content after
@@ -164,8 +164,8 @@ char	*get_next_line(int fd)
 }
 
 /*
-#include <stdio.h>
-#include <fcntl.h>
+#include <stdio.h> // printf()
+#include <fcntl.h> // open()
 
 // Test: Handling Multiple File Descriptors at the same time
 int	main(void)
@@ -187,58 +187,58 @@ int	main(void)
 	fd_3 = open("test_files/test_3.txt", O_RDONLY);
 
 	line = get_next_line(fd_1);
-	printf("line %d-->%s\n", line_nr_1++, line);
+	printf("fd_1, line %d-->%s\n", line_nr_1++, line);
 
 	line = get_next_line(fd_2);
-	printf("line %d-->%s\n", line_nr_2++, line);
+	printf("fd_2, line %d-->%s\n", line_nr_2++, line);
 
 	line = get_next_line(fd_3);
-	printf("line %d-->%s\n", line_nr_3++, line);
+	printf("fd_3, line %d-->%s\n", line_nr_3++, line);
 
 	line = get_next_line(fd_1);
-	printf("line %d-->%s\n", line_nr_1++, line);
+	printf("fd_2, fd_1, line %d-->%s\n", line_nr_1++, line);
 
 	line = get_next_line(fd_2);
-	printf("line %d-->%s\n", line_nr_2++, line);
+	printf("fd_2, line %d-->%s\n", line_nr_2++, line);
 
 	line = get_next_line(fd_3);
-	printf("line %d-->%s\n", line_nr_3++, line);
+	printf("fd_3, line %d-->%s\n", line_nr_3++, line);
 
 	line = get_next_line(fd_1);
-	printf("line %d-->%s\n", line_nr_1++, line);
+	printf("fd_1, line %d-->%s\n", line_nr_1++, line);
 
 	line = get_next_line(fd_2);
-	printf("line %d-->%s\n", line_nr_2++, line);
+	printf("fd_2, line %d-->%s\n", line_nr_2++, line);
 
 	line = get_next_line(fd_3);
-	printf("line %d-->%s\n", line_nr_3++, line);
+	printf("fd_3, line %d-->%s\n", line_nr_3++, line);
 
 	line = get_next_line(fd_1);
-	printf("line %d-->%s\n", line_nr_1++, line);
+	printf("fd_1, line %d-->%s\n", line_nr_1++, line);
 
 	line = get_next_line(fd_2);
-	printf("line %d-->%s\n", line_nr_2++, line);
+	printf("fd_2, line %d-->%s\n", line_nr_2++, line);
 
 	line = get_next_line(fd_3);
-	printf("line %d-->%s\n", line_nr_3++, line);
+	printf("fd_3, line %d-->%s\n", line_nr_3++, line);
 
 	line = get_next_line(fd_1);
-	printf("line %d-->%s\n", line_nr_1++, line);
+	printf("fd_1, line %d-->%s\n", line_nr_1++, line);
 
 	line = get_next_line(fd_2);
-	printf("line %d-->%s\n", line_nr_2++, line);
+	printf("fd_2, line %d-->%s\n", line_nr_2++, line);
 
 	line = get_next_line(fd_3);
-	printf("line %d-->%s\n", line_nr_3++, line);
+	printf("fd_3, line %d-->%s\n", line_nr_3++, line);
 
 	line = get_next_line(fd_1);
-	printf("line %d-->%s\n", line_nr_1++, line);
+	printf("fd_1, line %d-->%s\n", line_nr_1++, line);
 
 	line = get_next_line(fd_2);
-	printf("line %d-->%s\n", line_nr_2++, line);
+	printf("fd_2, line %d-->%s\n", line_nr_2++, line);
 
 	line = get_next_line(fd_3);
-	printf("line %d-->%s\n", line_nr_3++, line);
+	printf("fd_3, line %d-->%s\n", line_nr_3++, line);
 
 	close(fd_1);
 	close(fd_2);

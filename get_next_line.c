@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:36 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/12 19:43:46 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/15 12:19:09 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ again (or NULL when the EOF ('\0') was reached).
 
 Read data is appended to a string ('stash') until either a newline character
 or the EOF is encountered. This 'stash' is maintained as static storage,
-which accumulates reads between function calls (the size of reads is defined 
+which accumulates reads between function calls (the size of reads is defined
 by BUFFER_SIZE).
 A complete line (meaning until '\n' or EOF) is extracted from the
 'stash'. Afterward, the 'stash' is trimmed so it only contains content after
@@ -158,8 +158,8 @@ char	*get_next_line(int fd)
 }
 
 /*
-#include <stdio.h>
-#include <fcntl.h>
+#include <stdio.h> // printf()
+#include <fcntl.h> // open()
 
 // Test: Reading from file and standard input & Handling of binary data
 int	main(void)
@@ -171,9 +171,9 @@ int	main(void)
 	line_nr = 1;
 
 	fd = open("test_files/test_1.txt", O_RDONLY);
-	// close(fd); // Uncomment for testing below
-	// fd = 0; // Uncomment to test reading from standard input
-        // fd = open("test_files/test_binary_data.png", O_RDONLY) // Uncomment to test handling of binary data
+	//fd = 0; // Uncomment to test reading from standard input
+	//Uncomment to test handling of binary data
+	//fd = open("test_files/test_binary_data.png", O_RDONLY);
 
 	line = get_next_line(fd);
 	printf("line %d-->%s\n", line_nr++, line);

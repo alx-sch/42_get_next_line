@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:24 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/12 19:19:31 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/15 12:19:55 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 #  define BUFFER_SIZE 10
 # endif
 
-// Default value of 256 for available file descriptors.
+// Default value of 1024 for available file descriptors.
 // You can check the actual number via 'cat /proc/sys/fs/file-max';
 // it's a staggering '9223372036854775807' on my system!
 // It is a stretch to allocate an array with this amount of entries, but if
 // need be, you can easily adjust while compiling via the '-D FD_SIZE_=n' flag.
 # ifndef FD_SIZE
-#  define FD_SIZE 256
+#  define FD_SIZE 1024
 # endif
 
 # include <stdlib.h> // malloc(), free()

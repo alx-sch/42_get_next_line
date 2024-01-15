@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:05 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/12 11:50:06 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/15 11:51:40 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ char	*ft_stash_buf_join(char *stash, char *buffer)
 
 /*
 As included in the libft project/library.
-Finds a specific character in a string and returns a pointer pointing to its first
-occurrence; returns NULL if the character is not found.
+Finds a specific character in a string and returns a pointer pointing to
+its first occurrence; returns NULL if the character is not found.
 */
 char	*ft_strchr(const char *s, int c)
 {

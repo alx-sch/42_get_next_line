@@ -54,7 +54,7 @@ And the last! EOF
 or through piping
 
 ```bash
-./a.out < input.txt
+./a.out < test_files/test_1.txt
 ```
 
 ```bash

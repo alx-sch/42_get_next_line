@@ -21,7 +21,21 @@ The get_next_line() function is designed to handle multiple file descriptors, al
 - They are initialized only once during the first function call; subsequent calls to the function do not reinitialize them.
   
 ## The read() System Call
-The read() system call is a low-level function in C that allows a program to read data from a file descriptor: `   `
+The read() system call is a low-level function in C that allows a program to read data from a file descriptor; the protype is **`ssize_t read(int fd, void *buffer, size_t count)`**.
+- **fd (File Descriptor):** The file descriptor represents the file or I/O stream from which the data will be read. It could be a file, the standard input, or other types of I/O resources. It's an integer value returned by the open() system call.
+- **Buffer:** Memory location where the data read from the file descriptor is stored. It must be a pointer to a memory block that is large enough to accomodate the specified 'count' bytes of data.
+- **Count:** The number of bytes to be read from the file descriptor is stored; defined as `BUFFER_SIZE` in the get_next_line() project.
+- **Return Value**:
+    - **'>0'**: The number of bytes read.
+    - **'0'**: In case of reaching the end of file (EOF).
+    - **'-1'**: If an error occurs.
+
+## Function Flowchart
+- High-Level:
+    - Helper functions (e.g. ft_strlen(), ft_strlcat() ft_strchr(), as included in the [libft library](https://github.com/alx-sch/42_libft)) are not shown.
+    - Error handling for failed memory allocation null check is not shown (return NULL).
+ 
+![gnl_flowchart_5](https://github.com/alx-sch/42_get_next_line/assets/134595144/0ee09724-018c-4fc5-917e-504ac70f468b)
 
 
 Dynamic Memory Management:

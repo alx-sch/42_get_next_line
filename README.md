@@ -1,14 +1,47 @@
-# !!WIP!! 42_get_next_line !!WIP!!
+# 42_get_next_line
 
 <p align="center">
     <img src="https://github.com/alx-sch/42_get_next_line/assets/134595144/4c3cadb7-0375-4908-a67a-a90bd865ea6d" alt="libft" />
 </p>
 
-Function to read lines from a file descriptor one-by-one using static variables.
+The get_next_line() function is designed to handle multiple file descriptors, allowing to read lines one-by-one from different sources, only using static variables to keep track of read content between successive calls of get_next_line().
 
+## Features
 
-## Why using linked lists?
-Using linked lists offers several advantages:
+- **Line-by-Line Reading:** Implement sequential line-by-line reading to facilitate easy processing.
+- **Multiple File Descriptors:** Enable concurrent reading from multiple file descriptors.
+- **Dynamic Memory Allocation**: Efficiently manage memory using dynamic allocation for reading and storing lines.
+- **Persistent State Handling**: Utilize static variables for seamless continuation of line-by-line reading across successive calls to get_next_line().
+- **Tailored Configuration**: Easily adjust buffer size and the maximum number of used file descriptors using flags when compiling.
+- **Error Handling and Edge Cases**: Handle binary file reading logically to avoid undefined behavior.
+
+Efficiently manage memory using dynamic allocation for reading and storing lines.
+
+Multiple File Descriptors:
+
+Enable the function to handle reading lines from multiple file descriptors concurrently.
+Dynamic Memory Allocation:
+
+Efficiently manage memory using dynamic allocation for reading and storing lines.
+Line-by-Line Reading:
+
+Implement functionality to read lines sequentially, allowing for easy line-by-line processing.
+Static Variable Usage:
+
+Utilize static variables to maintain state between successive calls of the get_next_line function.
+Error Handling and Edge Cases:
+
+Implement robust error handling and address edge cases to ensure the function's reliability in various scenarios
+- 
+
+## Static Variables
+- Static variables are used to retain their values between function calls and throughout the entire execution of a program.  
+- They are declared within a function and are only accessible within that function.
+- They are initialized only once during the first function call; subsequent calls to the function do not reinitialize them.
+  
+## The read() System Call
+The read() system call is a low-level function in C that allows a program to read data from a file descriptor: `   `
+
 
 Dynamic Memory Management:
 

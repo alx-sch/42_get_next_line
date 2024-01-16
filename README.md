@@ -35,10 +35,16 @@ The read() system call is a low-level function in C that allows a program to rea
 - **High-Level:**
     - Helper functions (e.g. **ft_strlen()**, **ft_strlcat()**, **ft_strchr()**, as included in the [libft library](https://github.com/alx-sch/42_libft)) are not shown.
     - Error handling for null checks, including failed memory allocation, is not shown (returning NULL).
-  
- 
-![gnl_flowchart_4](https://github.com/alx-sch/42_get_next_line/assets/134595144/0935d5ea-6e36-408d-989f-f831633ec4e9)
+- **Functions:**
+    -   **`char *get_next_line(int fd)`** (greenish-blue): Reads a line from the specified file descriptor and returns it as a pointer to a string (green). Successive calls fetch subsequent lines. Returns NULL for errors, like invalid input (red), or when the EOF is reached (blue 'stash').
+    -    **`char *ft_stash_buf_join(char *stash, char *buffer)`** (light green): Concatenates the 'stash' and 'buffer' into a new string, combining the current read content from 'buffer' with the previous content stored in 'stash.' If 'stash' is NULL, it's assigned an empty string.
+    -    **`char *ft_read_until_newline_or_eof(int fd, char *stash)`** (yellow): Utilizes the read() function to fetch content into a 'buffer,' which is then appended to the 'stash.' The function returns the 'stash' if it contains a newline character or when the EOF is reached.
+    -    **`char *ft_extract_line(char *stash)`** (orange): Extracts and returns a substring from the 'stash,' starting from the beginning and ending either at the first newline character or the null-terminator. Returns NULL if the 'stash' is empty.
+    -    **`char *ft_trim_until_newline(char *stash)`** (light blue): Trims content from the 'stash,' including the first newline character, and returns the remaining content in a new string. If no newline character is found in 'stash,' the function returns NULL.
 
+![gnl_flowchart_6](https://github.com/alx-sch/42_get_next_line/assets/134595144/7cc3fac1-e609-4204-9a12-ae4d9c0542eb)
+
+ 
 
 
 Dynamic Memory Management:

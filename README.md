@@ -91,3 +91,6 @@ or through piping
 ```bash
 echo "First line\nThis is the second one\nAnd third!" | ./a.out
 ```
+## Acknowledgements  
+
+The poject badge used is retrieved from [this repo](https://github.com/ayogun/42-project-badges) by Ali Ogun.

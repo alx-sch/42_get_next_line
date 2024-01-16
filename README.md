@@ -37,7 +37,8 @@ The read() system call is a low-level function in C that allows a program to rea
     - Error handling for null checks, including failed memory allocation, is not shown (returning NULL).
   
  
-![gnl_flowchart_5](https://github.com/alx-sch/42_get_next_line/assets/134595144/0ee09724-018c-4fc5-917e-504ac70f468b)
+![gnl_flowchart_4](https://github.com/alx-sch/42_get_next_line/assets/134595144/0935d5ea-6e36-408d-989f-f831633ec4e9)
+
 
 
 Dynamic Memory Management:

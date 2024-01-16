@@ -41,6 +41,11 @@ The read() system call is a low-level function in C that allows a program to rea
     -    **`char *ft_read_until_newline_or_eof(int fd, char *stash)`** (yellow): Utilizes the read() function to fetch content into a 'buffer,' which is then appended to the 'stash.' The function returns the 'stash' if it contains a newline character or when the EOF is reached.
     -    **`char *ft_extract_line(char *stash)`** (orange): Extracts and returns a substring from the 'stash,' starting from the beginning and ending either at the first newline character (purple 'stash') or the null-terminator (green 'stash'). Returns NULL if the 'stash' is empty (blue 'stash').
     -    **`char *ft_trim_until_newline(char *stash)`** (light blue): Trims content from the 'stash,' including the first newline character, and returns the remaining content in a new string (purple 'stash'). If no newline character is found in 'stash,' the function returns NULL (green and blue 'stash').
+- **Variables:**
+   - **`static char *stash`**: A static pointer to a string that accumulates content from previous reads, storing data until a newline character is encountered or the EOF is reached. Before get_next_line() returns the extracted line, 'stash' is updated to only contain content after the encountered newline character.
+    - **`char *buffer`**: A temporary storage for reading data from a file descriptor. The content of the buffer is appended to the 'stash' after each read operation.
+    -  **`BUFFER_SIZE`**: The size of the buffer used for reading from the file descriptor. The variable type should be provided by the user as needed in the main.c (e.g. `#define BUFFER_SIZE_TYPE size_t`).
+    - **`FD_SIZE`** (bonus):  The maximum number of file descriptors the program is designed to handle. This value represents the size of the array (`static char *stash[FD_SIZE]`) used to store content for multiple file descriptors. The variable type should be provided by the user as needed in the main.c (e.g. `#define FD_SIZE_TYPE size_t`).
 
 ![gnl_flowchart_6](https://github.com/alx-sch/42_get_next_line/assets/134595144/7cc3fac1-e609-4204-9a12-ae4d9c0542eb)
 

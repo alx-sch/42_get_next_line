@@ -27,8 +27,8 @@ int	ft_isprint(int c)
 /*
 Extracts content from the input string ('stash') until the first newline
 character, so one line. Allocates memory for the extracted line, including the
-newline character if present, and returns extracted line as string.
-Returns NULL if 'stash' is empty.
+newline character if present, and returns the extracted line as a string.
+Returns NULL if 'stash' is an empty string (stash[0] == '\0').
 */
 char	*ft_extract_line(char *stash)
 {

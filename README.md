@@ -32,6 +32,7 @@ The read() system call is a low-level function in C that allows a program to rea
     - **'-1'**: If an error occurs.
 
 ## Function Flowchart
+![gnl_flowchart_5](https://github.com/alx-sch/42_get_next_line/assets/134595144/38bb8ea3-38b1-43c6-9760-785444e92124)
 - **High-Level:**
     - Helper functions (e.g. **ft_strlen()**, **ft_strlcat()**, **ft_strchr()**, as included in the [libft library](https://github.com/alx-sch/42_libft)) are not shown.
     - Error handling for null checks, including failed memory allocation, is not shown (returning NULL).
@@ -46,11 +47,6 @@ The read() system call is a low-level function in C that allows a program to rea
     - **`char *buffer`**: A temporary storage for reading data from a file descriptor. The content of the buffer is appended to the 'stash' after each read operation.
     -  **`BUFFER_SIZE`**: The size of the buffer used for reading from the file descriptor. The variable type should be provided by the user as needed in the main.c (e.g. `#define BUFFER_SIZE_TYPE size_t`).
     - **`FD_SIZE`** (bonus):  The maximum number of file descriptors the program is designed to handle. This value represents the size of the array (`static char *stash[FD_SIZE]`) used to store content for multiple file descriptors. The variable type should be provided by the user as needed in the main.c (e.g. `#define FD_SIZE_TYPE size_t`).
-
-![gnl_flowchart_6](https://github.com/alx-sch/42_get_next_line/assets/134595144/7cc3fac1-e609-4204-9a12-ae4d9c0542eb)
-
- 
-
 
 Dynamic Memory Management:
 

@@ -25,7 +25,7 @@ The get_next_line() function is designed to handle multiple file descriptors, al
 The read() system call is a low-level function in C that allows a program to read data from a file descriptor; the protype is **`ssize_t read(int fd, void *buffer, size_t count)`**.
 - **fd (File Descriptor):** The file descriptor represents the file or I/O stream from which the data will be read. It could be a file, the standard input, or other types of I/O resources. It's an integer value returned by the open() system call.
 - **Buffer:** Memory location where the data read from the file descriptor is stored. It must be a pointer to a memory block that is large enough to accomodate the specified 'count' bytes of data.
-- **Count:** The number of bytes to be read from the file descriptor is stored; defined as `BUFFER_SIZE` in the get_next_line() project.
+- **Count:** The number of bytes to be read from the file descriptor; defined as `BUFFER_SIZE` in the get_next_line() project.
 - **Return Value**:
     - **'>0'**: The number of bytes read.
     - **'0'**: In case of reaching the end of file (EOF).

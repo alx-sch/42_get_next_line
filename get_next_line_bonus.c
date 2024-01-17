@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:36 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/15 12:42:57 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/17 19:17:15 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,35 @@ int	ft_isprint(int c)
 }
 
 /*
+As included in the libft project/library but with ft_bzero() incorporated
+to accommodate the Norm (max. number of functions).
+*/
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void			*ptr;
+	unsigned char	*byte_ptr;
+	size_t			total_size;
+
+	if (nmemb > 0)
+	{
+		if (SIZE_MAX / nmemb < size)
+			return (NULL);
+	}
+	ptr = malloc(nmemb * size);
+	if (!ptr)
+		return (NULL);
+	byte_ptr = (unsigned char *)ptr;
+	total_size = nmemb * size;
+	while (total_size > 0)
+	{
+		*byte_ptr = 0;
+		byte_ptr++;
+		total_size--;
+	}
+	return (ptr);
+}
+
+/*
 Extracts content from the input string ('stash') until the first newline
 character, so one line. Allocates memory for the extracted line, including the
 newline character if present, and returns the extracted line as a string.
@@ -40,7 +69,7 @@ char	*ft_extract_line(char *stash)
 		return (NULL);
 	while (stash[i] != '\n' && stash[i])
 		i++;
-	line = (char *)malloc((i + 2));
+	line = (char *)ft_calloc(i + 2, sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -61,6 +90,7 @@ char	*ft_extract_line(char *stash)
 /*
 Reads data from a file descriptor ('fd') and appends it to a string ('stash')
 until a newline character is encountered or the end of the file is reached.
+Initializes an empty string for 'stash', if NULL
 The function dynamically allocates memory for a buffer to read data, and it
 manages the concatenation of the buffer with the existing 'stash'.
 If an error occurs during reading or memory allocation, it frees the allocated
@@ -80,7 +110,9 @@ char	*ft_read_until_newline_or_eof(int fd, char *stash)
 	int		bytes_read;
 	char	*buffer;
 
-	buffer = malloc((BUFFER_SIZE + 1));
+	if (!stash)
+		stash = (char *)ft_calloc(1, sizeof(char));
+	buffer = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
 		return (NULL);
 	bytes_read = 1;
@@ -138,7 +170,7 @@ Returns:
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*stash[FD_SIZE];
+	static char	*stash[FD_SIZE] = {NULL};
 	size_t		i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)

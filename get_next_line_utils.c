@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:05 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/15 11:51:22 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/17 18:54:12 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,9 @@ char	*ft_stash_buf_join(char *stash, char *buffer)
 	size_t	len_stash;
 	size_t	len_buffer;
 
-	if (!stash)
-	{
-		stash = (char *)malloc(1);
-		if (!stash)
-			return (NULL);
-		stash[0] = '\0';
-	}
 	len_stash = ft_strlen(stash);
 	len_buffer = ft_strlen(buffer);
-	str_joined = (char *)malloc(len_stash + len_buffer + 1);
+	str_joined = (char *)ft_calloc(len_stash + len_buffer + 1, sizeof(char));
 	if (!str_joined)
 	{
 		free(stash);
@@ -131,7 +124,7 @@ char	*ft_trim_until_newline(char *stash)
 		free(stash);
 		return (NULL);
 	}
-	new_str = (char *)malloc((ft_strlen(stash) - i + 1));
+	new_str = (char *)ft_calloc(ft_strlen(stash) - i + 1, sizeof(char));
 	if (!new_str)
 	{
 		free(stash);

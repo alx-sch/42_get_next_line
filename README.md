@@ -99,5 +99,5 @@ or through piping
 echo "First line\nThis is the second one\nAnd third!" | ./a.out
 ```
 ## Acknowledgements  
-
-The poject badge used is retrieved from [this repo](https://github.com/ayogun/42-project-badges) by Ali Ogun.
+- Some of the test files were retrieved from Fabricio Soares' [testing framework](https://github.com/xicodomingues/francinette/tree/master/tests/get_next_line/fsoares) designed for the get_next_line project.   
+- The poject badge used is retrieved from [this repo](https://github.com/ayogun/42-project-badges) by Ali Ogun.

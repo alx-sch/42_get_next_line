@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:36 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/19 16:18:58 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/19 16:24:30 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,12 +159,6 @@ by BUFFER_SIZE).
 A complete line (meaning until '\n' or EOF) is extracted from the
 'stash'. Afterward, the 'stash' is trimmed so it only contains content after
 the newline character, which will be stored and used in the next function call.
-
-To handle the reading of binary data in a more controlled way, get_next_line()
-checks the data input for non-printable characters and NULL terminators not
-followed by another NULL terminator, which indicates an EOF. If the binary data
-check was successful (i.e., if non-printable characters or a single NULL
-terminator was found without an EOF indication), the function returns NULL.
 
 Parameters:
 	- int fd: File descriptor representing the file to read from.

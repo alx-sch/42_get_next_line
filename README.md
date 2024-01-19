@@ -75,6 +75,29 @@ In Summary, the use of linked lists allows for a more flexible and efficient han
 ## Binary File   
 A binary file is a file that contains information in a format that is not composed of readable characters. 
 Examples of binary files include executable files (e.g., .exe), image files (e.g., .jpg, .png), audio files (e.g., .mp3), and many others
+
+```C
+int	ft_isbinary(char *stash)
+{
+	size_t	i;
+
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+	{
+		if (stash[i] == '\0' || stash[i] < 32 || stash[i] > 126)
+		{
+			if (stash[i] == '\0' && stash[i + 1] == '\0')
+				break ;
+			else
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+```
+
+
 ```bash
 �=ѧ�?k`m�N+�f�|�x�f��V�����x��v=]���BEUg#D
 ֡�z���� =��ʵ���U|��gHt>ײ�����D�[���ɟ�9ѧ{B��X�o_���q��7=��꼋��ڏ��

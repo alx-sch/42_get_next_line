@@ -81,7 +81,7 @@ int	ft_isbinary(char *stash)
 ```
 
 ## Error Handling
-Due to the project's strict specifications, get_next_line() is designed to return either the read line NULL for all other cases, making it impossible to differentiate between reaching EOF and encountering errors.  
+Due to the project's strict specifications, get_next_line() is designed to return either the read line or NULL for all other cases, making it impossible to differentiate between reaching EOF and encountering errors.  
 
 In future projects, I would adjust the prototype to `int get_next_line(int fd, char **line) `. This modification would enable the return value to indicate success or error (e.g., '1' for success, '0' for EOF, '-1' for binary files, '-2' for failed memory allocation, and so on). Additionally, incorporating 'perror' messages would help tp provide more information to the user.
 

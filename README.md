@@ -48,42 +48,17 @@ The read() system call is a low-level function in C that allows a program to rea
     -  **`BUFFER_SIZE`**: The size of the buffer used for reading from the file descriptor. The variable type should be provided by the user as needed in the main.c (e.g. `#define BUFFER_SIZE_TYPE size_t`).
     - **`FD_SIZE`** (bonus):  The maximum number of file descriptors the program is designed to handle. This value represents the size of the array (`static char *stash[FD_SIZE]`) used to store content for multiple file descriptors. The variable type should be provided by the user as needed in the main.c (e.g. `#define FD_SIZE_TYPE size_t`).
 
-Dynamic Memory Management:
-
-Linked lists allow dynamic memory allocation for each line of text, ensuring that memory is used efficiently based on the actual size of each line. This is particularly useful in scenarios where the length of lines varies significantly.
-Buffer Management:
-
-Linked lists can help manage the buffer for reading and storing characters efficiently. Each node in the linked list can represent a portion of the line, and as characters are read, new nodes can be dynamically allocated.
-Ease of Concatenation:
-
-Linked lists make it easier to concatenate characters or strings. When reading data in chunks, new nodes can be added to the list, and the linked structure allows efficient concatenation without needing to move or copy large chunks of data.
-Scalability:
-
-Linked lists provide a scalable solution, especially when dealing with files containing large lines or when there is a need to handle a large number of lines. The ability to allocate memory dynamically ensures that the program can adapt to varying line lengths and file sizes.
-Efficient Memory Release:
-
-When using linked lists, it's generally easier to release memory efficiently. Nodes can be traversed and freed individually, ensuring that memory is deallocated as soon as it is no longer needed.
-Facilitates Modularity:
-
-A linked list implementation can be more modular, making it easier to understand and maintain. Each node can encapsulate the logic for handling a portion of the line, leading to a more organized and readable codebase.
-Adaptability to Different Data Sources:
-
-Linked lists provide flexibility, making it easier to adapt the get_next_line function to different data sources. Whether reading from a file, a socket, or any other stream, the linked list structure can be adapted to handle various scenarios.
-
-In Summary, the use of linked lists allows for a more flexible and efficient handling of lines of text with varying lengths and dynamic memory allocation needs.
-
 ## Handling of Binary Data
-Binary files, such as executables, images, and audio files (.exe, /jpeg, .png. .mp3, etc.), contain data in formats not composed of readable characters. While the project's specifications allow for undefined behavior when reading binary files, it's advisable to handle binary data in a controlled way to avoid unexpected outputs or issues.
+Binary files, such as executables, images, and audio files (.exe, .jpeg, .png, .mp3, etc.), contain data in formats not composed of readable characters. While the project's specifications allow for undefined behavior when reading binary files, it's good practice to handle binary data in a controlled way to avoid unexpected outputs or issues.
 
-Example of an output when reading binary data:
+Here's an example of an output when reading binary data:
 ```bash
 �=ѧ�?k`m�N+�f�|�x�f��V�����x��v=]���BEUg#D
 ֡�z���� =��ʵ���U|��gHt>ײ�����D�[���ɟ�9ѧ{B��X�o_���q��7=��꼋��ڏ��
 @�^���Jǋ���S}'��N��Yk���        &걋9���Г��V��*�_�����Lь��P
 ```
 
-The follown
-
+The following function checks if the read data contains ASCII values less than 32 or greater than 126, as well as NULL terminators, which are not indicative of an EOF. This helps to identify binary data.
 ```C
 int	ft_isbinary(char *stash)
 {

@@ -80,11 +80,6 @@ int	ft_isbinary(char *stash)
 }
 ```
 
-## Error Handling
-Due to the project's strict specifications, get_next_line() is designed to either return the read line or NULL for all other cases, making it impossible to differentiate between reaching EOF and encountering errors.  
-
-In future projects, I would adjust the prototype to `int get_next_line(int fd, char **line) `. This modification would enable the return value to indicate success or error (e.g., '1' for success, '0' for EOF, '-1' for binary files, '-2' for failed memory allocation, and so on). Additionally, incorporating 'perror' messages would help tp provide more information to the user.
-
 ## Avoiding Memory Leaks
 get_next_line() allocates memory for the line it returns, which should be freed by the user before the program ends. Additionally, read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks when the user is done reading lines, it is necessary to free the allocated memory for this variable. This can be achieved by calling `get_next_line(-1)`, using the following code as the function's invalid input check:
 
@@ -136,6 +131,43 @@ int	main(void)
 	return (0);
 }
 ```
+## Error Handling
+Due to the project's strict specifications, get_next_line() is designed to either return the read line or NULL for all other cases, making it impossible to differentiate between reaching EOF and encountering errors.  
+
+In future projects, I would adjust the prototype to `int get_next_line(int fd, char **line) `. This modification would enable the return value to indicate success or error (e.g., '1' for success, '0' for EOF, '-1' for invalid input, '-2' for binary data, '-3' for failed memory allocation, and so on). Additionally, incorporating 'perror' messages within get_next_line functions would help to provide more information to the user:
+```C
+int	main(void)
+{
+	int	fd;
+	char	*line;
+	int	result;
+
+	fd = open("file.txt", O_RDONLY);
+	if (fd == -1)
+		return (1);
+
+	while ((result = get_next_line(fd, &line)) > 0) 
+	{
+		printf("-->%s\n", line);
+		free(line); 
+	}
+   	if (result < 0) // Or better: Error handling within get_next_line functions
+	{
+		perror("Error in get_next_line.\n");
+		if (result == -1)
+			perror("Invalid Input\nPlease check values for fd and BUFFER_SIZE.");
+		if (result == -2)
+			perror("Reading binary data.\n");
+		if (result == -3)
+			perror("Failed memory allocation\n");
+    	}
+	close(fd);
+	get_next_line(-1); 
+
+	return (0);	
+}
+```
+
 ## Testing
 Feel free to uncomment the testing programs found at the end of 'get_next_line.c' and 'get_next_line_bonus.c'.   
 Try out the following:

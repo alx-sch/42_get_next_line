@@ -22,7 +22,7 @@ The get_next_line() function is designed to handle multiple file descriptors, al
 - **Fun Fact:** Unlike other types of variables, static variables are automatically initialized to zero; for pointers, this means they are initialized to a null pointer. According to [42's coding standard](https://github.com/42School/norminette), it is acceptable to declare and initialize static variables in the same line ("_Declaration and an initialisation cannot be on the same line, except for global variables (when allowed), static variables, and constants._"). So please go ahead and maintain good practice and readability without losing 'real estate' 😉 ("_Each function must be maximum 25 lines._"), e.g.: `static char *stash = NULL;`.
 
 ## The read() System Call
-The read() system call is a low-level function in C that allows a program to read data from a file descriptor; the protype is **`ssize_t read(int fd, void *buffer, size_t count)`**.
+The read() system call is a low-level function in C that allows a program to read data from a file descriptor; the protype is `ssize_t read(int fd, void *buffer, size_t count)`.
 - **fd (File Descriptor):** The file descriptor represents the file or I/O stream from which the data will be read. It could be a file, the standard input, or other types of I/O resources. It's an integer value returned by the open() system call.
 - **Buffer:** Memory location where the data read from the file descriptor is stored. It must be a pointer to a memory block that is large enough to accomodate the specified 'count' bytes of data.
 - **Count:** The number of bytes to be read from the file descriptor; defined as `BUFFER_SIZE` in the get_next_line() project.
@@ -81,7 +81,79 @@ int	ft_isbinary(char *stash)
 ```
 
 
-## Reading standardinput:
+## Avoiding Memory Leaks
+get_next_line() allocates memory for the line it returns, which should be freed by the user before the program ends. Additionally, read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks when the user is done reading lines, it is necessary to free the allocated memory for this variable. This can be achieved by calling `get_next_line(-1)` using the following code in get_next_line():
+
+```C
+//get_next_line.c
+if (fd < 0 || BUFFER_SIZE <= 0)
+{
+	if (stash != NULL)
+		free(stash);
+	return (NULL);
+}
+
+//get_next_line_bonus.c
+if (fd < 0 || BUFFER_SIZE <= 0)
+{
+	i = 0;
+	while (i < FD_SIZE)
+	{
+		if (stash[i] != NULL)
+			free(stash[i]);
+		i++;
+	}
+	return (NULL);
+}
+```
+A short program that uses get_next_line() and correctly frees all allocated memory would look like this:
+```C
+#include <stdio.h> // printf()
+#include <fcntl.h> // open()
+
+int	main(void)
+{
+	int	fd;
+	char	*line;
+
+	fd = open("file.txt", O_RDONLY);
+	if (fd == -1)
+		return (1);
+
+	while ((line = get_next_line(fd)) != NULL) // Print all lines in file.txt
+	{
+		printf("-->%s\n", line);
+		free(line); // Free memory allocated for the extracted line
+	}
+
+	close(fd);
+	get_next_line(-1); // Free memory allocated for the stash
+
+	return (0);
+}
+```
+## Testing
+
+To test edge cases, feel free to uncomment the testing programs found at the end of get_next_line.c or get_next_line_bonus.c. Try out different edge cases when testing:
+- Read different files as provided in the folder 'test_files', which encompass several edge cases.
+- Test reading from the standard input (`fd = 0`).
+	- Pipe file via standard input:
+		```bash
+		./TEST.out < test_files/test_1.txt
+		```	
+	- Provide a multiline input when prompted (after calling the test program, e.g. `./TEST`). Copy and the following and use it as input:
+   		```bash
+		This is the first line.
+		This is the second line.
+		Third line.
+     		Fourth.
+		And the last! EOF
+		```
+	- `cc -Wall -Werror -Wextra get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=1 -o TEST`
+
+, compile via `cc -Wall -Werror -Wextra get_next_line.c get_next_line_utils.c -o TEST` / `cc -Wall -Werror -Wextra get_next_line.c get_next_line_utils.c -o TEST` and check for memory leaks via 
+
+## Reading from standard input:
 - fd = 0 -> prompted to input text when calling program -> multiline not trivial -> you can copy and past this, for example, run the testing program and paste a multiline input, e.g. this one:
 ```bash
 This is the first line.
@@ -99,5 +171,5 @@ or through piping
 echo "First line\nThis is the second one\nAnd third!" | ./a.out
 ```
 ## Acknowledgements  
-- Some of the test files were retrieved from Fabricio Soares' [testing framework](https://github.com/xicodomingues/francinette/tree/master/tests/get_next_line/fsoares) for get_next_line.   
+- Some of the test files were retrieved from Fabricio Soares' [testing framework](https://github.com/xicodomingues/francinette/tree/master/tests/get_next_line/fsoares) for get_next_line().   
 - The project badge used is retrieved from [this repo](https://github.com/ayogun/42-project-badges) by Ali Ogun.

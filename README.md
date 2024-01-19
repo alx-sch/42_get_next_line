@@ -133,25 +133,23 @@ int	main(void)
 }
 ```
 ## Testing
-
-To test edge cases, feel free to uncomment the testing programs found at the end of get_next_line.c or get_next_line_bonus.c. Try out different edge cases when testing:
+Feel free to uncomment the testing programs found at the end of 'get_next_line.c' and 'get_next_line_bonus.c'. Try out different edge cases when testing:
 - Read different files as provided in the folder 'test_files', which encompass several edge cases.
 - Test reading from the standard input (`fd = 0`).
-	- Pipe file via standard input:
+	- Pipe a file via standard input:
 		```bash
 		./TEST.out < test_files/test_1.txt
 		```	
-	- Provide a multiline input when prompted (after calling the test program, e.g. `./TEST`). Copy and the following and use it as input:
+	- Provide multiline input when prompted (after calling the test program, e.g. `./TEST`). Copy and past the following as input:
    		```bash
 		This is the first line.
 		This is the second line.
-		Third line.
-     		Fourth.
-		And the last! EOF
+		The third.
+		Fourth.
+		And last! EOF.
 		```
-	- `cc -Wall -Werror -Wextra get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=1 -o TEST`
+- Adjust the `BUFFER_SIZE` while compiling with: `cc -Wall -Werror -Wextra get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=1 -o TEST`
 
-, compile via `cc -Wall -Werror -Wextra get_next_line.c get_next_line_utils.c -o TEST` / `cc -Wall -Werror -Wextra get_next_line.c get_next_line_utils.c -o TEST` and check for memory leaks via 
 
 ## Reading from standard input:
 - fd = 0 -> prompted to input text when calling program -> multiline not trivial -> you can copy and past this, for example, run the testing program and paste a multiline input, e.g. this one:

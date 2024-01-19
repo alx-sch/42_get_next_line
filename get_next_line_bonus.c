@@ -6,22 +6,37 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:36 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/17 19:17:15 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/19 16:11:52 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
 /*
-As included in the libft project/library.
-Used for non-binary data check in get_next_line().
+To handle the reading of binary data in a more controlled way, ft_isbinary()
+checks if the 'stash' contains non-printable characters and NULL terminators not
+followed by another NULL terminator, which indicates an end-of-file (EOF).
+If the binary data check was successful (i.e., if non-printable characters or a
+single NULL terminator was found without an EOF indication), '1' is returned,
+otherwise '0'.
 */
-int	ft_isprint(int c)
+int	ft_isbinary(char *stash)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	else
-		return (0);
+	size_t	i;
+
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+	{
+		if (stash[i] == '\0' || stash[i] < 32 || stash[i] > 126)
+		{
+			if (stash[i] == '\0' && stash[i + 1] == '\0')
+				break ;
+			else
+				return (1);
+		}
+		i++;
+	}
+	return (0);
 }
 
 /*
@@ -171,25 +186,14 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	static char	*stash[FD_SIZE] = {NULL};
-	size_t		i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash[fd] = ft_read_until_newline_or_eof(fd, stash[fd]);
 	if (!stash[fd])
 		return (NULL);
-	i = 0;
-	while (stash[fd][i] && stash[fd][i] != '\n')
-	{
-		if (stash[fd][i] == '\0' || !ft_isprint((stash[fd][i])))
-		{
-			if (stash[fd][i] == '\0' && stash[fd][i + 1] == '\0')
-				break ;
-			else
-				return (NULL);
-		}
-		i++;
-	}
+	if (ft_isbinary(stash))
+		return (NULL);
 	line = ft_extract_line(stash[fd]);
 	stash[fd] = ft_trim_until_newline(stash[fd]);
 	return (line);

@@ -155,7 +155,7 @@ int	main(void)
 	{
 		perror("Error in get_next_line.\n");
 		if (result == -1)
-			perror("Invalid Input\nPlease check values for fd and BUFFER_SIZE.");
+			perror("Invalid Input. Please check values for fd and BUFFER_SIZE.\n");
 		if (result == -2)
 			perror("Reading binary data.\n");
 		if (result == -3)

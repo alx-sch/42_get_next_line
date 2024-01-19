@@ -146,7 +146,7 @@ int	main(void)
 	if (fd == -1)
 		return (1);
 
-	while ((result = get_next_line(fd, &line)) > 0) 
+	while ((result = get_next_line(fd, &line)) > 0)  // Print all lines in file.txt
 	{
 		printf("-->%s\n", line);
 		free(line); 

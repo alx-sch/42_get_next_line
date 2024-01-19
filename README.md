@@ -72,9 +72,17 @@ Linked lists provide flexibility, making it easier to adapt the get_next_line fu
 
 In Summary, the use of linked lists allows for a more flexible and efficient handling of lines of text with varying lengths and dynamic memory allocation needs.
 
-## Binary File   
-A binary file is a file that contains information in a format that is not composed of readable characters. 
-Examples of binary files include executable files (e.g., .exe), image files (e.g., .jpg, .png), audio files (e.g., .mp3), and many others
+## Handling of Binary Data
+Binary files, such as executables, images, and audio files (.exe, /jpeg, .png. .mp3, etc.), contain data in formats not composed of readable characters. While the project's specifications allow for undefined behavior when reading binary files, it's advisable to handle binary data in a controlled way to avoid unexpected outputs or issues.
+
+Example of an output when reading binary data:
+```bash
+�=ѧ�?k`m�N+�f�|�x�f��V�����x��v=]���BEUg#D
+֡�z���� =��ʵ���U|��gHt>ײ�����D�[���ɟ�9ѧ{B��X�o_���q��7=��꼋��ڏ��
+@�^���Jǋ���S}'��N��Yk���        &걋9���Г��V��*�_�����Lь��P
+```
+
+The follown
 
 ```C
 int	ft_isbinary(char *stash)
@@ -97,12 +105,6 @@ int	ft_isbinary(char *stash)
 }
 ```
 
-
-```bash
-�=ѧ�?k`m�N+�f�|�x�f��V�����x��v=]���BEUg#D
-֡�z���� =��ʵ���U|��gHt>ײ�����D�[���ɟ�9ѧ{B��X�o_���q��7=��꼋��ڏ��
-@�^���Jǋ���S}'��N��Yk���        &걋9���Г��V��*�_�����Lь��P
-```
 
 ## Reading standardinput:
 - fd = 0 -> prompted to input text when calling program -> multiline not trivial -> you can copy and past this, for example, run the testing program and paste a multiline input, e.g. this one:

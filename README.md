@@ -45,8 +45,8 @@ The read() system call is a low-level function in C that allows a program to rea
 - **Variables:**
    - **`static char *stash`**: A static pointer to a string that accumulates content from previous reads, storing data until a newline character is encountered or the EOF is reached. Before get_next_line() returns the extracted line, 'stash' is updated to only contain content after the encountered newline character.
     - **`char *buffer`**: A temporary storage for reading data from a file descriptor. The content of the buffer is appended to the 'stash' after each read operation.
-    -  **`BUFFER_SIZE`**: The size of the buffer used for reading from the file descriptor. The variable type should be provided by the user as needed in the main.c (e.g. `#define BUFFER_SIZE_TYPE size_t`).
-    - **`FD_SIZE`** (bonus):  The maximum number of file descriptors the program is designed to handle. This value represents the size of the array (`static char *stash[FD_SIZE]`) used to store content for multiple file descriptors. The variable type should be provided by the user as needed in the main.c (e.g. `#define FD_SIZE_TYPE size_t`).
+    -  **`BUFFER_SIZE`**: The size of the buffer used for reading from the file descriptor. It is good practice to provide the data type in the main.c as needed (e.g. `#define BUFFER_SIZE_TYPE size_t`).
+    - **`FD_SIZE`** (bonus):  The maximum number of file descriptors the program is designed to handle. This value represents the size of the array (`static char *stash[FD_SIZE]`) used to store content for multiple file descriptors. It is good practice to provide the data type in the main.c as needed (e.g. `#define FD_SIZE_TYPE size_t`).
 
 ## Handling of Binary Data
 Binary files, such as executables, images, and audio files (.exe, .jpeg, .png, .mp3, etc.), contain data in formats not composed of readable characters. While the project's specifications allow for undefined behavior when reading binary files, it's good practice to this in a controlled way to avoid unexpected outputs or issues.

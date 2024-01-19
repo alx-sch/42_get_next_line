@@ -22,9 +22,9 @@ The get_next_line() function is designed to handle multiple file descriptors, al
 - **Fun Fact:** Unlike other types of variables, static variables are automatically initialized to zero; for pointers, this means they are initialized to a null pointer. According to [42's coding standard](https://github.com/42School/norminette), it is acceptable to declare and initialize static variables in the same line ("_Declaration and an initialisation cannot be on the same line, except for global variables (when allowed), static variables, and constants._"). So please go ahead and maintain good practice and readability without losing 'real estate' 😉 ("_Each function must be maximum 25 lines._"), e.g.: `static char *stash = NULL;`.
 
 ## The read() System Call
-The read() system call is a low-level function in C that allows a program to read data from a file descriptor; the protype is `ssize_t read(int fd, void *buffer, size_t count)`.
+The read() system call is a low-level function in C that allows a program to read data from a file descriptor; the prototype is `ssize_t read(int fd, void *buffer, size_t count)`.
 - **fd (File Descriptor):** The file descriptor represents the file or I/O stream from which the data will be read. It could be a file, the standard input, or other types of I/O resources. It's an integer value returned by the open() system call.
-- **Buffer:** Memory location where the data read from the file descriptor is stored. It must be a pointer to a memory block that is large enough to accomodate the specified 'count' bytes of data.
+- **Buffer:** Memory location where the data read from the file descriptor is stored. It must be a pointer to a memory block that is large enough to accommodate the specified 'count' bytes of data.
 - **Count:** The number of bytes to be read from the file descriptor; defined as `BUFFER_SIZE` in the get_next_line() project.
 - **Return Value**:
     - **'>0'**: The number of bytes read.
@@ -40,7 +40,7 @@ The read() system call is a low-level function in C that allows a program to rea
     -   **`char *get_next_line(int fd)`** (greenish-blue): Reads a line from the specified file descriptor and returns it as a pointer to a string (green). Successive calls fetch subsequent lines. Returns NULL for errors, like invalid input (red), or when the EOF is reached (blue 'stash').
     -    **`char *ft_stash_buf_join(char *stash, char *buffer)`** (light green): Concatenates the 'stash' and 'buffer' into a new string, combining the current read content from 'buffer' with the previous content stored in 'stash.' If 'stash' is NULL, it's assigned an empty string.
     -    **`char *ft_read_until_newline_or_eof(int fd, char *stash)`** (yellow): Utilizes the read() function to fetch content into a 'buffer,' which is then appended to the 'stash.' The function returns the 'stash' if it contains a newline character or when the EOF is reached.
-    -    **`char *ft_extract_line(char *stash)`** (orange): Extracts and returns a substring from the 'stash,' starting from the beginning and ending either at the first newline character (purple 'stash') or the null-terminator (green 'stash'). Returns NULL if the 'stash' is empty (blue 'stash').
+    -    **`char *ft_extract_line(char *stash)`** (orange): Extracts and returns a substring from the 'stash,' starting from the beginning and ending either at the first newline character (purple 'stash') or the NULL terminator (green 'stash'). Returns NULL if the 'stash' is empty (blue 'stash').
     -    **`char *ft_trim_until_newline(char *stash)`** (light blue): Trims content from the 'stash,' including the first newline character, and returns the remaining content in a new string (purple 'stash'). If no newline character is found in 'stash,' the function returns NULL (green and blue 'stash').
 - **Variables:**
    - **`static char *stash`**: A static pointer to a string that accumulates content from previous reads, storing data until a newline character is encountered or the EOF is reached. Before get_next_line() returns the extracted line, 'stash' is updated to only contain content after the encountered newline character.
@@ -49,7 +49,7 @@ The read() system call is a low-level function in C that allows a program to rea
     - **`FD_SIZE`** (bonus):  The maximum number of file descriptors the program is designed to handle. This value represents the size of the array (`static char *stash[FD_SIZE]`) used to store content for multiple file descriptors. It is good practice to provide the data type in the main.c as needed (e.g. `#define FD_SIZE_TYPE size_t`).
 
 ## Handling of Binary Data
-Binary files, such as executables, images, and audio files (.exe, .jpeg, .png, .mp3, etc.), contain data in formats not composed of readable characters. While the project's specifications allow for undefined behavior when reading binary files, it's good practice to this in a controlled way to avoid unexpected outputs or issues.
+Binary files, such as executables, images, and audio files (.exe, .jpeg, .png, .mp3, etc.), contain data in formats not composed of readable characters. While the project's specifications allow for undefined behavior when reading binary files, it's good practice to handle this in a controlled way to avoid unexpected outputs or issues.
 
 Here's an example of an output when reading binary data:
 ```bash
@@ -67,9 +67,9 @@ int	ft_isbinary(char *stash)
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
 	{
-		if (stash[i] == '\0' || stash[i] < 32 || stash[i] > 126)
+		if (stash[i] == '\0' || stash[i] < 32 || stash[i] > 126) // check for NULL terminator or non-printable characters
 		{
-			if (stash[i] == '\0' && stash[i + 1] == '\0')
+			if (stash[i] == '\0' && stash[i + 1] == '\0') // check for EOF
 				break ;
 			else
 				return (1);
@@ -180,7 +180,7 @@ Try out the following:
 		```bash
 		./TEST.out < test_files/test_1.txt
 		```	
-	- Provide multiline input when prompted (after calling the test program, e.g. `./TEST`). Copy and past the following as input:
+	- Provide multiline input when prompted (after calling the test program, e.g. `./TEST`). Copy and paste the following as input:
    		```bash
 		This is the first line.
 		This is the second line.

@@ -81,7 +81,7 @@ int	ft_isbinary(char *stash)
 ```
 
 ## Avoiding Memory Leaks
-get_next_line() allocates memory for the line it returns, which should be freed by the user before the program ends. Additionally, read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks when the user is done reading lines, it is necessary to free the allocated memory for this variable. This can be achieved by calling `get_next_line(-1)` using the following code as the function's invalid input check:
+get_next_line() allocates memory for the line it returns, which should be freed by the user before the program ends. Additionally, read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks when the user is done reading lines, it is necessary to free the allocated memory for this variable. This can be achieved by calling `get_next_line(-1)`, using the following code as the function's invalid input check:
 
 ```C
 //get_next_line.c

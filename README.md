@@ -58,7 +58,7 @@ Here's an example of an output when reading binary data:
 @�^���Jǋ���S}'��N��Yk���        &걋9���Г��V��*�_�����Lь��P
 ```
 
-The following function checks if the read data contains [ASCII values less than 32 or greater than 126](https://www.ascii-code.com/), as well as NULL terminators, which are not indicative of an EOF. This helps to identify binary data.
+The following function checks if the read data contains [ASCII values less than 32 or greater than 126](https://www.ascii-code.com/) or 'non-EOF' NULL terminators. This helps to identify binary data.
 ```C
 int	ft_isbinary(char *stash)
 {

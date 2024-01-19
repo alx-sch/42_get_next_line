@@ -131,6 +131,8 @@ int	main(void)
 	return (0);
 }
 ```
+Use Valgrind, a memory analysis tool, to detect memory leaks in your program: `valgrind ./TEST`.
+
 ## Error Handling
 Due to the project's strict specifications, get_next_line() is designed to either return the read line or NULL for all other cases, making it impossible to differentiate between reaching EOF and encountering errors.  
 

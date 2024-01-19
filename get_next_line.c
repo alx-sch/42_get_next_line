@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:36 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/19 16:24:30 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/19 17:35:27 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,11 @@ char	*get_next_line(int fd)
 	static char	*stash = NULL;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		if (stash != NULL)
+			free(stash);
 		return (NULL);
+	}
 	stash = ft_read_until_newline_or_eof(fd, stash);
 	if (!stash)
 		return (NULL);
@@ -207,20 +211,27 @@ int	main(void)
 
 	line = get_next_line(fd);
 	printf("line %d-->%s\n", line_nr++, line);
+	free(line);
 
 	line = get_next_line(fd);
 	printf("line %d-->%s\n", line_nr++, line);
+	free(line);
 
 	line = get_next_line(fd);
 	printf("line %d-->%s\n", line_nr++, line);
+	free(line);
 
 	line = get_next_line(fd);
 	printf("line %d-->%s\n", line_nr++, line);
+	free(line);
 
 	line = get_next_line(fd);
 	printf("line %d-->%s\n", line_nr++, line);
+	free(line);
 
 	close(fd);
+	get_next_line(-1); // freeing stash
+
 	return (0);
 }
 */

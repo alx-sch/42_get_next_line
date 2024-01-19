@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:36 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/19 16:24:19 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/01/19 18:00:56 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,13 +180,23 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	static char	*stash[FD_SIZE] = {NULL};
+	size_t		i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		i = 0;
+		while (i < FD_SIZE)
+		{
+			if (stash[i] != NULL)
+				free(stash[i]);
+			i++;
+		}
 		return (NULL);
+	}
 	stash[fd] = ft_read_until_newline_or_eof(fd, stash[fd]);
 	if (!stash[fd])
 		return (NULL);
-	if (ft_isbinary(stash))
+	if (ft_isbinary(stash[fd]))
 		return (NULL);
 	line = ft_extract_line(stash[fd]);
 	stash[fd] = ft_trim_until_newline(stash[fd]);
@@ -218,61 +228,81 @@ int	main(void)
 
 	line = get_next_line(fd_1);
 	printf("fd_1, line %d-->%s\n", line_nr_1++, line);
+	free(line);
 
 	line = get_next_line(fd_2);
 	printf("fd_2, line %d-->%s\n", line_nr_2++, line);
+	free(line);
 
 	line = get_next_line(fd_3);
 	printf("fd_3, line %d-->%s\n", line_nr_3++, line);
+	free(line);
 
 	line = get_next_line(fd_1);
 	printf("fd_2, fd_1, line %d-->%s\n", line_nr_1++, line);
+	free(line);
 
 	line = get_next_line(fd_2);
 	printf("fd_2, line %d-->%s\n", line_nr_2++, line);
+	free(line);
 
 	line = get_next_line(fd_3);
 	printf("fd_3, line %d-->%s\n", line_nr_3++, line);
+	free(line);
 
 	line = get_next_line(fd_1);
 	printf("fd_1, line %d-->%s\n", line_nr_1++, line);
+	free(line);
 
 	line = get_next_line(fd_2);
 	printf("fd_2, line %d-->%s\n", line_nr_2++, line);
+	free(line);
 
 	line = get_next_line(fd_3);
 	printf("fd_3, line %d-->%s\n", line_nr_3++, line);
+	free(line);
 
 	line = get_next_line(fd_1);
 	printf("fd_1, line %d-->%s\n", line_nr_1++, line);
+	free(line);
 
 	line = get_next_line(fd_2);
 	printf("fd_2, line %d-->%s\n", line_nr_2++, line);
+	free(line);
 
 	line = get_next_line(fd_3);
 	printf("fd_3, line %d-->%s\n", line_nr_3++, line);
+	free(line);
 
 	line = get_next_line(fd_1);
 	printf("fd_1, line %d-->%s\n", line_nr_1++, line);
+	free(line);
 
 	line = get_next_line(fd_2);
 	printf("fd_2, line %d-->%s\n", line_nr_2++, line);
+	free(line);
 
 	line = get_next_line(fd_3);
 	printf("fd_3, line %d-->%s\n", line_nr_3++, line);
+	free(line);
 
 	line = get_next_line(fd_1);
 	printf("fd_1, line %d-->%s\n", line_nr_1++, line);
+	free(line);
 
 	line = get_next_line(fd_2);
 	printf("fd_2, line %d-->%s\n", line_nr_2++, line);
+	free(line);
 
 	line = get_next_line(fd_3);
 	printf("fd_3, line %d-->%s\n", line_nr_3++, line);
+	free(line);
 
 	close(fd_1);
 	close(fd_2);
 	close(fd_3);
+	get_next_line(-1); // freeing stash
+
 	return (0);
 }
 */

@@ -80,9 +80,8 @@ int	ft_isbinary(char *stash)
 }
 ```
 
-
 ## Avoiding Memory Leaks
-get_next_line() allocates memory for the line it returns, which should be freed by the user before the program ends. Additionally, read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks when the user is done reading lines, it is necessary to free the allocated memory for this variable. This can be achieved by calling `get_next_line(-1)` using the following code in get_next_line():
+get_next_line() allocates memory for the line it returns, which should be freed by the user before the program ends. Additionally, read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks when the user is done reading lines, it is necessary to free the allocated memory for this variable. This can be achieved by calling `get_next_line(-1)` using the following code within the function's invalid input check:
 
 ```C
 //get_next_line.c
@@ -135,6 +134,7 @@ int	main(void)
 ## Testing
 Feel free to uncomment the testing programs found at the end of 'get_next_line.c' and 'get_next_line_bonus.c'. Try out the following:
 - Read different files as provided in the folder 'test_files', which encompass several edge cases.
+- Adjust the `BUFFER_SIZE` while compiling with: `cc -Wall -Werror -Wextra get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=1 -o TEST`
 - Test reading from the standard input (`fd = 0`).
 	- Pipe a file via standard input:
 		```bash
@@ -148,26 +148,7 @@ Feel free to uncomment the testing programs found at the end of 'get_next_line.c
 		Fourth.
 		And last! EOF.
 		```
-- Adjust the `BUFFER_SIZE` while compiling with: `cc -Wall -Werror -Wextra get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=1 -o TEST`
 
-
-## Reading from standard input:
-- fd = 0 -> prompted to input text when calling program -> multiline not trivial -> you can copy and past this, for example, run the testing program and paste a multiline input, e.g. this one:
-```bash
-This is the first line.
-This is the second line.
-And the last! EOF
-```
-
-or through piping
-
-```bash
-./a.out < test_files/test_1.txt
-```
-
-```bash
-echo "First line\nThis is the second one\nAnd third!" | ./a.out
-```
 ## Acknowledgements  
 - Some of the test files were retrieved from Fabricio Soares' [testing framework](https://github.com/xicodomingues/francinette/tree/master/tests/get_next_line/fsoares) for get_next_line().   
 - The project badge used is retrieved from [this repo](https://github.com/ayogun/42-project-badges) by Ali Ogun.

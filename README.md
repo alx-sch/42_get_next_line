@@ -49,7 +49,7 @@ The read() system call is a low-level function in C that allows a program to rea
     - **`FD_SIZE`** (bonus):  The maximum number of file descriptors the program is designed to handle. This value represents the size of the array (`static char *stash[FD_SIZE]`) used to store content for multiple file descriptors. The variable type should be provided by the user as needed in the main.c (e.g. `#define FD_SIZE_TYPE size_t`).
 
 ## Handling of Binary Data
-Binary files, such as executables, images, and audio files (.exe, .jpeg, .png, .mp3, etc.), contain data in formats not composed of readable characters. While the project's specifications allow for undefined behavior when reading binary files, it's good practice to handle binary data in a controlled way to avoid unexpected outputs or issues.
+Binary files, such as executables, images, and audio files (.exe, .jpeg, .png, .mp3, etc.), contain data in formats not composed of readable characters. While the project's specifications allow for undefined behavior when reading binary files, it's good practice to this in a controlled way to avoid unexpected outputs or issues.
 
 Here's an example of an output when reading binary data:
 ```bash

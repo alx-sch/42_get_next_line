@@ -80,6 +80,11 @@ int	ft_isbinary(char *stash)
 }
 ```
 
+## Error Handling
+Due to the project's strict specifications, get_next_line() is designed to return either the read line NULL for all other cases, making it impossible to differentiate between reaching EOF and encountering errors.  
+
+In future projects, I would adjust the prototype to `int get_next_line(int fd, char **line) `. This modification would enable the return value to indicate success or error (e.g., '1' for success, '0' for EOF, '-1' for binary files, '-2' for failed memory allocation, and so on). Additionally, incorporating 'perror' messages would help tp provide more information to the user.
+
 ## Avoiding Memory Leaks
 get_next_line() allocates memory for the line it returns, which should be freed by the user before the program ends. Additionally, read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks when the user is done reading lines, it is necessary to free the allocated memory for this variable. This can be achieved by calling `get_next_line(-1)`, using the following code as the function's invalid input check:
 

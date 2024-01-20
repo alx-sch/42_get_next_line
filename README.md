@@ -176,8 +176,9 @@ int	main(void)
 
 ## Testing
 Feel free to uncomment the testing programs found at the end of 'get_next_line.c' and 'get_next_line_bonus.c'.   
+
 Try out the following:
-- Read different files as provided in the folder 'test_files', which encompass several edge cases.
+- Read different files as provided in the folder 'test_files', which cover several edge cases.
 - Adjust the `BUFFER_SIZE` while compiling with: `cc -Wall -Werror -Wextra get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=1 -o TEST`
 - Test reading from the standard input (`fd = 0`).
 	- Pipe a file via standard input:

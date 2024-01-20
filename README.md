@@ -43,7 +43,7 @@ The read() system call is a low-level function in C that allows a program to rea
     -    **`char *ft_extract_line(char *stash)`** (orange): Extracts and returns a substring from the 'stash,' starting from the beginning and ending either at the first newline character (purple 'stash') or the NULL terminator (green 'stash'). Returns NULL if the 'stash' is empty (blue 'stash').
     -    **`char *ft_trim_until_newline(char *stash)`** (light blue): Trims content from the 'stash,' including the first newline character, and returns the remaining content in a new string (purple 'stash'). If no newline character is found in 'stash,' the function returns NULL (green and blue 'stash').
 - **Variables:**
-   - **`static char *stash`**: The static variable that accumulates content from previous reads, storing data until a newline character is encountered or the EOF is reached. Before get_next_line() returns the extracted line, the 'stash' is updated to only contain content after the encountered newline character. Memory allocated for 'stash' can be freed by calling the function with an invalid file descriptor, e.g., `get_next_line(-1)`.
+   - **`static char *stash`**: The static variable that accumulates content from previous reads, storing data until a newline character is encountered or the EOF is reached. Before get_next_line() returns the extracted line, the 'stash' is updated to only contain content after the encountered newline character. Memory allocated for 'stash' can be freed by calling the function with an invalid file descriptor, e.g. `get_next_line(-1)`.
     - **`char *buffer`**: A temporary storage for reading data from a file descriptor. The content of the buffer is appended to the 'stash' after each read operation.
     -  **`BUFFER_SIZE`**: The size of the buffer used for reading from the file descriptor. It is good practice to provide the data type in the main.c as needed (e.g. `#define BUFFER_SIZE_TYPE size_t`).
     - **`FD_SIZE`** (bonus):  The maximum number of file descriptors the program is designed to handle. This value represents the size of the array (`static char *stash[FD_SIZE]`) used to store content for multiple file descriptors. It is good practice to provide the data type in the main.c as needed (e.g. `#define FD_SIZE_TYPE size_t`).
@@ -136,7 +136,7 @@ Use Valgrind, a memory analysis tool, to detect memory leaks in your program: `v
 ## Error Handling
 Due to the project's strict specifications, get_next_line() is designed to either return the read line or NULL for all other cases, making it impossible to differentiate between reaching EOF and encountering errors.  
 
-In future projects, I would adjust the prototype to `int get_next_line(int fd, char **line) `. This modification would enable the return value to indicate success or error (e.g., '1' for success, '0' for EOF, '-1' for invalid input, '-2' for binary data, '-3' for failed memory allocation, and so on). Additionally, incorporating 'perror' messages within get_next_line functions would help to provide more information to the user:
+In future projects, I would adjust the prototype to `int get_next_line(int fd, char **line) `. This modification would enable the return value to indicate success or error (e.g. '1' for success, '0' for EOF, '-1' for invalid input, '-2' for binary data, '-3' for failed memory allocation, and so on). Additionally, incorporating 'perror' messages within get_next_line functions would help to provide more information to the user:
 ```C
 int	main(void)
 {

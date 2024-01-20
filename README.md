@@ -146,14 +146,17 @@ int	main(void)
 
 	fd = open("file.txt", O_RDONLY);
 	if (fd == -1)
+	{
+		perror("Error opening file.\n");
 		return (1);
+	}
 
 	while ((result = get_next_line(fd, &line)) > 0)  // Print all lines in file.txt
 	{
 		printf("-->%s\n", line);
 		free(line); 
 	}
-   	if (result < 0) // Or better: Error handling within get_next_line functions
+   	if (-3 <= result && result < 0) // Or better: Error handling within get_next_line functions
 	{
 		perror("Error in get_next_line.\n");
 		if (result == -1)
@@ -162,9 +165,10 @@ int	main(void)
 			perror("Reading binary data.\n");
 		if (result == -3)
 			perror("Failed memory allocation\n");
+		return (1);
     	}
 	close(fd);
-	get_next_line(-1); 
+	get_next_line(-42, &line); // get_next_line() adjusted so that 'fd == -42' frees memory allocated for stash
 
 	return (0);	
 }

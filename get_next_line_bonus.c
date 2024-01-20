@@ -45,9 +45,9 @@ to accommodate the Norm (max. number of functions).
 */
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void			*ptr;
+	void		*ptr;
 	unsigned char	*byte_ptr;
-	size_t			total_size;
+	size_t		total_size;
 
 	if (nmemb > 0)
 	{
@@ -122,7 +122,7 @@ Returns:
 */
 char	*ft_read_until_newline_or_eof(int fd, char *stash)
 {
-	int		bytes_read;
+	int	bytes_read;
 	char	*buffer;
 
 	if (!stash)
@@ -210,13 +210,13 @@ char	*get_next_line(int fd)
 // Test: Handling Multiple File Descriptors at the same time
 int	main(void)
 {
-	int		fd_1;
-	int		fd_2;
-	int		fd_3;
+	int	fd_1;
+	int	fd_2;
+	int	fd_3;
 	char	*line;
-	int		line_nr_1;
-	int		line_nr_2;
-	int		line_nr_3;
+	int	line_nr_1;
+	int	line_nr_2;
+	int	line_nr_3;
 
 	line_nr_1 = 1;
 	line_nr_2 = 1;
@@ -239,7 +239,7 @@ int	main(void)
 	free(line);
 
 	line = get_next_line(fd_1);
-	printf("fd_2, fd_1, line %d-->%s\n", line_nr_1++, line);
+	printf("fd_1, line %d-->%s\n", line_nr_1++, line);
 	free(line);
 
 	line = get_next_line(fd_2);

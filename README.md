@@ -49,16 +49,16 @@ The read() system call is a low-level function in C that allows a program to rea
     - **`FD_SIZE`**:  The maximum number of file descriptors the program is designed to handle. This value represents the size of the array (`static char *stash[FD_SIZE]`) used to store content for multiple file descriptors. It is good practice to provide the data type in the main.c as needed (e.g. `#define FD_SIZE_TYPE size_t`).
 
 ## Handling of Binary Data
-Binary files, such as executables, images, and audio files (.exe, .jpeg, .png, .mp3, etc.), contain data in formats not composed of readable characters. While the project's specifications allow for undefined behavior when reading binary files, it's good practice to handle this in a controlled way to avoid unexpected outputs or issues.
+Binary files, such as executables, images, and audio files (.exe, .jpeg, .png, .mp3, etc.), contain data in formats not composed of readable characters. While the project's specifications allow for undefined behavior when reading binary files, it is advisable to handle this in a controlled manner to prevent unexpected outputs or issues.
 
-Here's an example of an output when reading binary data:
+Here's an example of what may be displayed when reading binary data:
 ```bash
 �=ѧ�?k`m�N+�f�|�x�f��V�����x��v=]���BEUg#D
 ֡�z���� =��ʵ���U|��gHt>ײ�����D�[���ɟ�9ѧ{B��X�o_���q��7=��꼋��ڏ��
 @�^���Jǋ���S}'��N��Yk���        &걋9���Г��V��*�_�����Lь��P
 ```
 
-The following function checks if the read data contains [ASCII values less than 32 or greater than 126](https://www.ascii-code.com/) or 'non-EOF' NULL terminators. This helps to identify binary data.
+The following function verifies the content of read data by checking for ASCII values less than 32 or greater than 126 (non-printable characters) and 'non-EOF' NULL terminators, which indicate binary data. This check is instrumental in identifying binary data.
 ```C
 int	ft_isbinary(char *stash)
 {
@@ -76,6 +76,7 @@ int	ft_isbinary(char *stash)
 		}
 		i++;
 	}
+
 	return (0);
 }
 ```
@@ -83,12 +84,15 @@ int	ft_isbinary(char *stash)
 ## Avoiding Memory Leaks
 get_next_line() allocates memory for the line it returns, which should be freed by the user before the program ends. Additionally, read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks when the user is done reading lines, it is necessary to free the allocated memory for this variable. This can be achieved by calling `get_next_line(-1)`, using the following code as the function's invalid input check:
 
+get_next_line() allocates memory for the line it returns, and it is the user's responsibility to free this memory before the program ends. Additionally, the read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks when the user is done reading lines, it is necessary to free the allocated memory for both the returned line and the 'stash'. This can be accomplished by extending the function's invalid input check to include appropriate memory deallocation, making a `get_next_line(-1)` call a command to free the 'stash':
+
 ```C
 // get_next_line.c
 if (fd < 0 || BUFFER_SIZE <= 0)
 {
 	if (stash != NULL)
 		free(stash);
+
 	return (NULL);
 }
 
@@ -102,6 +106,7 @@ if (fd < 0 || BUFFER_SIZE <= 0)
 			free(stash[i]);
 		i++;
 	}
+
 	return (NULL);
 }
 ```
@@ -119,7 +124,7 @@ int	main(void)
 	if (fd == -1)
 		return (1);
 
-	while ((line = get_next_line(fd)) != NULL) // Print all lines in file.txt
+	while ((line = get_next_line(fd)) != NULL) // Read and print all lines from file.txt
 	{
 		printf("-->%s\n", line);
 		free(line); // Free memory allocated for the extracted line
@@ -134,9 +139,9 @@ int	main(void)
 Use Valgrind, a memory analysis tool, to detect memory leaks in your program: `valgrind ./TEST`.
 
 ## Error Handling
-Due to the project's strict specifications, get_next_line() is designed to either return the read line or NULL for all other cases, making it impossible to differentiate between reaching EOF and encountering errors.  
+Due to the project's strict specifications, get_next_line() is designed to either return the read line or NULL for all other cases, making it impossible to differentiate between reaching EOF and encountering errors.
 
-In future projects, I would adjust the prototype to `int get_next_line(int fd, char **line) `. This modification would enable the return value to indicate success or error (e.g. '1' for success, '0' for EOF, '-1' for invalid input, '-2' for binary data, '-3' for failed memory allocation, and so on). Additionally, incorporating 'perror' messages within get_next_line functions would help to provide more information to the user:
+For future projects, consider adjusting the prototype to int `get_next_line(int fd, char **line)`. This modification would allow the return value to indicate success or error (e.g., '1' for success, '0' for EOF, '-1' for invalid input, '-2' for binary data, '-3' for failed memory allocation, etc.). Additionally, incorporating 'perror' messages within get_next_line functions would help provide more detailed information to the user:
 ```C
 int	main(void)
 {
@@ -151,12 +156,13 @@ int	main(void)
 		return (1);
 	}
 
-	while ((result = get_next_line(fd, &line)) > 0)  // Print all lines in file.txt
+	while ((result = get_next_line(fd, &line)) > 0)  // Read and print all lines from file.txt
 	{
 		printf("-->%s\n", line);
 		free(line); 
 	}
-   	if (-3 <= result && result < 0) // Or better: Error handling within get_next_line functions
+
+   	if (-3 <= result && result < 0) // Alternatively, include error printing within get_next_line functions directly.
 	{
 		perror("Error in get_next_line.\n");
 		if (result == -1)
@@ -164,9 +170,14 @@ int	main(void)
 		if (result == -2)
 			perror("Reading binary data.\n");
 		if (result == -3)
-			perror("Failed memory allocation\n");
+			perror("Failed memory allocation.\n");
+
+		close(fd);
+		get_next_line(-42, &line); // get_next_line() adjusted so that 'fd == -42' frees memory allocated for stash
+
 		return (1);
     	}
+
 	close(fd);
 	get_next_line(-42, &line); // get_next_line() adjusted so that 'fd == -42' frees memory allocated for stash
 
@@ -175,12 +186,14 @@ int	main(void)
 ```
 
 ## Testing
-Feel free to uncomment the testing programs found at the end of 'get_next_line.c' and 'get_next_line_bonus.c'.   
+
+
+Feel free to uncomment the testing programs found at the end of 'get_next_line.c' and 'get_next_line_bonus.c'.
 
 Try out the following:
-- Read different files as provided in the folder 'test_files', which cover several edge cases.
-- Adjust the `BUFFER_SIZE` while compiling with: `cc -Wall -Werror -Wextra get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=1 -o TEST`
-- Test reading from the standard input (`fd = 0`).
+- Read different files as provided in the 'test_files' folder, covering several edge cases.
+- Adjust the `BUFFER_SIZE` during compilation using: `cc -Wall -Werror -Wextra get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=1 -o TEST`
+- Test reading from standard input (`fd = 0`).
 	- Pipe a file via standard input:
 		```bash
 		./TEST.out < test_files/test_1.txt
@@ -195,5 +208,5 @@ Try out the following:
 		```
 
 ## Acknowledgements  
-- Some of the test files were retrieved from Fabricio Soares' [testing framework](https://github.com/xicodomingues/francinette/tree/master/tests/get_next_line/fsoares) for get_next_line().   
+- Some of the test files were retrieved from Fabricio Soares' [testing framework](https://github.com/xicodomingues/francinette/tree/master/tests/get_next_line/fsoares).   
 - The project badge used is retrieved from [this repo](https://github.com/ayogun/42-project-badges) by Ali Ogun.

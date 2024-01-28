@@ -10,22 +10,22 @@ The get_next_line() function is designed to handle multiple file descriptors, al
 
 - **Line-by-Line Reading:** Implement sequential line-by-line reading to facilitate easy processing.
 - **Multiple File Descriptors:** Enable concurrent reading from multiple file descriptors.
-- **Dynamic Memory Allocation**: Efficiently manage memory using dynamic allocation for reading and storing lines.
-- **Persistent State Handling**: Utilize static variables for seamless continuation of line-by-line reading across successive calls to get_next_line().
-- **Tailored Configuration**: Easily adjust buffer size and the maximum number of used file descriptors via compilation flags.
-- **Error Handling and Edge Cases**: Handle binary file reading logically to avoid undefined behavior.
+- **Dynamic Memory Allocation:** Efficiently manage memory using dynamic allocation for reading and storing lines.
+- **Persistent State Handling:** Utilize static variables for seamless continuation of line-by-line reading across successive calls to get_next_line().
+- **Tailored Configuration:** Easily adjust buffer size and the maximum number of used file descriptors via compilation flags.
+- **Error Handling and Edge Cases:** Handle binary file reading logically to avoid undefined behavior.
 
 ## Static Variables
-- Static variables are used to retain their values between function calls and throughout the entire execution of a program.  
+- Static variables retain their values between function calls and throughout the entire execution of a program.  
 - They are declared within a function and are only accessible within that function.
 - They are initialized only once during the first function call; subsequent calls to the function do not reinitialize them.
-- **Fun Fact:** Unlike other types of variables, static variables are automatically initialized to zero; for pointers, this means they are initialized to a null pointer. According to [42's coding standard](https://github.com/42School/norminette), it is acceptable to declare and initialize static variables in the same line ("_Declaration and an initialisation cannot be on the same line, except for global variables (when allowed), static variables, and constants._"). So please go ahead and maintain good practice and readability without losing 'real estate' 😉 ("_Each function must be maximum 25 lines._"), e.g.: `static char *stash = NULL;`.
+- **Fun Fact:** Unlike other types of variables, static variables are automatically initialized to zero. For pointers, this means they are initialized to a NULL pointer. According to [42's coding standard](https://github.com/42School/norminette), it is acceptable to declare and initialize static variables in the same line ("_Declaration and an initialisation cannot be on the same line, except for global variables (when allowed), static variables, and constants._"). So please go ahead and maintain good practice and readability without losing 'real estate' 😉 ("_Each function must be maximum 25 lines._"), e.g.: `static char *stash = NULL;`.
 
 ## The read() System Call
 The read() system call is a low-level function in C that allows a program to read data from a file descriptor; the prototype is `ssize_t read(int fd, void *buffer, size_t count)`.
-- **fd (File Descriptor):** The file descriptor represents the file or I/O stream from which the data will be read. It could be a file, the standard input, or other types of I/O resources. It's an integer value returned by the open() system call.
-- **Buffer:** Memory location where the data read from the file descriptor is stored. It must be a pointer to a memory block that is large enough to accommodate the specified 'count' bytes of data.
-- **Count:** The number of bytes to be read from the file descriptor; defined as `BUFFER_SIZE` in the get_next_line() project.
+- **fd (File Descriptor):** Represents the file or I/O stream from which the data will be read. It could be a file, the standard input, or other types of I/O resources. It's an integer value returned by the open() system call.
+- **Buffer:** A memory location where the data read from the file descriptor is stored. It must be a pointer to a memory block large enough to accommodate the specified 'count' bytes of data.
+- **Count:** The number of bytes to be read from the file descriptor, defined as `BUFFER_SIZE` in the get_next_line() project.
 - **Return Value**:
     - **'>0'**: The number of bytes read.
     - **'0'**: In case of reaching the end of file (EOF).
@@ -39,14 +39,14 @@ The read() system call is a low-level function in C that allows a program to rea
 - **Functions:**
     -   **`char *get_next_line(int fd)`** (greenish-blue): Reads a line from the specified file descriptor and returns it as a pointer to a string (green). Successive calls fetch subsequent lines. Returns NULL for errors, like invalid input (red), or when the EOF is reached (blue 'stash').
     -    **`char *ft_stash_buf_join(char *stash, char *buffer)`** (light green): Concatenates the 'stash' and 'buffer' into a new string, combining the current read content from 'buffer' with the previous content stored in 'stash.' If 'stash' is NULL, it's assigned an empty string.
-    -    **`char *ft_read_until_newline_or_eof(int fd, char *stash)`** (yellow): Utilizes the read() function to fetch content into a 'buffer,' which is then appended to the 'stash.' The function returns the 'stash' if it contains a newline character or when the EOF is reached.
-    -    **`char *ft_extract_line(char *stash)`** (orange): Extracts and returns a substring from the 'stash,' starting from the beginning and ending either at the first newline character (purple 'stash') or the NULL terminator (green 'stash'). Returns NULL if the 'stash' is empty (blue 'stash').
-    -    **`char *ft_trim_until_newline(char *stash)`** (light blue): Trims content from the 'stash,' including the first newline character, and returns the remaining content in a new string (purple 'stash'). If no newline character is found in 'stash,' the function returns NULL (green and blue 'stash').
+    -    **`char *ft_read_until_newline_or_eof(int fd, char *stash)`** (yellow): Utilizes the read() function to fetch content into a 'buffer', which is then appended to the 'stash'. The function returns the 'stash' if it contains a newline character or when the EOF is reached.
+    -    **`char *ft_extract_line(char *stash)`** (orange): Extracts and returns a substring from the 'stash', starting from the beginning and ending either at the first newline character (purple 'stash') or the NULL terminator (green 'stash'). Returns NULL if the 'stash' is empty (blue 'stash').
+    -    **`char *ft_trim_until_newline(char *stash)`** (light blue): Trims content from the 'stash', including the first newline character, and returns the remaining content in a new string (purple 'stash'). If no newline character is found in 'stash', the function returns NULL (green and blue 'stash').
 - **Variables:**
    - **`static char *stash`**: The static variable that accumulates content from previous reads, storing data until a newline character is encountered or the EOF is reached. Before get_next_line() returns the extracted line, the 'stash' is updated to only contain content after the encountered newline character. Memory allocated for 'stash' can be freed by calling the function with an invalid file descriptor, e.g. `get_next_line(-1)`.
     - **`char *buffer`**: A temporary storage for reading data from a file descriptor. The content of the buffer is appended to the 'stash' after each read operation.
-    -  **`BUFFER_SIZE`**: The size of the buffer used for reading from the file descriptor. It is good practice to provide the data type in the main.c as needed (e.g. `#define BUFFER_SIZE_TYPE size_t`).
-    - **`FD_SIZE`** (bonus):  The maximum number of file descriptors the program is designed to handle. This value represents the size of the array (`static char *stash[FD_SIZE]`) used to store content for multiple file descriptors. It is good practice to provide the data type in the main.c as needed (e.g. `#define FD_SIZE_TYPE size_t`).
+    - **`BUFFER_SIZE`**: The size of the buffer used for reading from the file descriptor. It is good practice to provide the data type in the main.c as needed (e.g. `#define BUFFER_SIZE_TYPE size_t`).
+    - **`FD_SIZE`**:  The maximum number of file descriptors the program is designed to handle. This value represents the size of the array (`static char *stash[FD_SIZE]`) used to store content for multiple file descriptors. It is good practice to provide the data type in the main.c as needed (e.g. `#define FD_SIZE_TYPE size_t`).
 
 ## Handling of Binary Data
 Binary files, such as executables, images, and audio files (.exe, .jpeg, .png, .mp3, etc.), contain data in formats not composed of readable characters. While the project's specifications allow for undefined behavior when reading binary files, it's good practice to handle this in a controlled way to avoid unexpected outputs or issues.

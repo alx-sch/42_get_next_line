@@ -58,7 +58,7 @@ Here's an example of what may be displayed when reading binary data:
 @�^���Jǋ���S}'��N��Yk���        &걋9���Г��V��*�_�����Lь��P
 ```
 
-The following function verifies the content of read data by checking for ASCII values less than 32 or greater than 126 (non-printable characters) and 'non-EOF' NULL terminators, which indicate binary data. This check is instrumental in identifying binary data.
+The following function verifies the content of read data by checking for ASCII values less than 32 or greater than 126 (non-printable characters) and 'non-EOF' NULL terminators, which indicate binary data. These checks help to identify binary data.
 ```C
 int	ft_isbinary(char *stash)
 {

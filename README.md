@@ -58,7 +58,7 @@ Here's an example of what may be displayed when reading binary data:
 @�^���Jǋ���S}'��N��Yk���        &걋9���Г��V��*�_�����Lь��P
 ```
 
-The following function verifies the content of read data by checking for ASCII values less than 32 or greater than 126 (non-printable characters) and 'non-EOF' NULL terminators, which indicate binary data. These checks help to identify binary data.
+The following function verifies the content of read data by checking for ASCII values less than 32 or greater than 126 (non-printable characters) and 'non-EOF' NULL terminators. These checks help to identify binary data.
 ```C
 int	ft_isbinary(char *stash)
 {
@@ -82,8 +82,6 @@ int	ft_isbinary(char *stash)
 ```
 
 ## Avoiding Memory Leaks
-get_next_line() allocates memory for the line it returns, which should be freed by the user before the program ends. Additionally, read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks when the user is done reading lines, it is necessary to free the allocated memory for this variable. This can be achieved by calling `get_next_line(-1)`, using the following code as the function's invalid input check:
-
 get_next_line() allocates memory for the line it returns, and it is the user's responsibility to free this memory before the program ends. Additionally, the read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks when the user is done reading lines, it is necessary to free the allocated memory for both the returned line and the 'stash'. This can be accomplished by extending the function's invalid input check to include appropriate memory deallocation, making a `get_next_line(-1)` call a command to free the 'stash':
 
 ```C

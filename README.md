@@ -112,6 +112,8 @@ A short program that uses get_next_line() and frees all allocated memory would l
 ```C
 #include <stdio.h> // printf()
 #include <fcntl.h> // open()
+#include <unistd.h> // read(), write(), close()
+#include <stdlib.h> // malloc(), free()
 
 int	main(void)
 {
@@ -143,6 +145,12 @@ For future implementations of get_next_line(), I would recommend updating the fu
 
 
 ```C
+#include <stdio.h> // printf()
+#include <fcntl.h> // open()
+#include <unistd.h> // read(), write(), close()
+#include <stdlib.h> // malloc(), free()
+#include <errno.h> // perror()
+
 int	main(void)
 {
 	int	fd;

@@ -108,7 +108,7 @@ if (fd < 0 || BUFFER_SIZE <= 0)
 	return (NULL);
 }
 ```
-A short program that uses get_next_line() and correctly frees all allocated memory would look like this:
+A short program that uses get_next_line() and frees all allocated memory would look like this:
 ```C
 #include <stdio.h> // printf()
 #include <fcntl.h> // open()

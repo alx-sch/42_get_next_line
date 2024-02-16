@@ -141,7 +141,7 @@ Use Valgrind, a memory analysis tool, to detect memory leaks in your program: `v
 ## Error Handling Limitations
 Due to the project's strict specifications, get_next_line() is designed to either return the read line or NULL for all other cases, making it impossible to differentiate between reaching the EOF and errors.
 
-For future implementations of get_next_line(), I would recommend updating the function prototype from `char *get_next_line(int fd)` to `int get_next_line(int fd, char **line)` to overcome these limitations in error handling. This modification enables the return value to signify various cases (e.g., '1' for success, '0' for EOF, '-1' for invalid input, '-2' for binary data, '-3' for failed memory allocation, etc.). Additionally, integrating 'perror' messages within the get_next_line functions would enhance user understanding by providing more detailed information.
+For future implementations of get_next_line(), I would update the function prototype from `char *get_next_line(int fd)` to `int get_next_line(int fd, char **line)` to overcome these limitations in error handling. This modification enables the return value to signify various cases (e.g., '1' for success, '0' for EOF, '-1' for invalid input, '-2' for binary data, '-3' for failed memory allocation, etc.). Additionally, integrating error messages within the get_next_line functions would enhance user understanding by providing more detailed information.
 
 
 ```C

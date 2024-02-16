@@ -205,7 +205,7 @@ Try out the following:
 		```bash
 		./TEST.out < test_files/test_1.txt
 		```	
-	- Provide multiline input when prompted (after calling the test program, e.g. `./TEST`). Copy and paste the following as input:
+	- Provide multiline input after running the test program (e.g. `./TEST`). Copy and paste the following as input:
    		```bash
 		This is the first line.
 		This is the second line.

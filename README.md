@@ -148,7 +148,6 @@ For future implementations of get_next_line(), I would update the function proto
 #include <fcntl.h> // open()
 #include <unistd.h> // read(), write(), close()
 #include <stdlib.h> // malloc(), free()
-#include <errno.h> // perror()
 
 int	main(void)
 {
@@ -159,7 +158,7 @@ int	main(void)
 	fd = open("file.txt", O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Error opening file.\n");
+		printf("Error opening file.\n");
 		return (1);
 	}
 
@@ -171,13 +170,13 @@ int	main(void)
 
    	if (-3 <= result && result < 0) // Alternatively, include error printing within get_next_line functions directly.
 	{
-		perror("Error in get_next_line.\n");
+		printf("Error in get_next_line.\n");
 		if (result == -1)
-			perror("Invalid Input. Please check values for fd and BUFFER_SIZE.\n");
+			printf("Invalid Input. Please check values for fd and BUFFER_SIZE.\n");
 		if (result == -2)
-			perror("Reading binary data.\n");
+			printf("Reading binary data.\n");
 		if (result == -3)
-			perror("Failed memory allocation.\n");
+			printf("Failed memory allocation.\n");
 
 		close(fd);
 		get_next_line(-42, &line); // get_next_line() adjusted so that 'fd == -42' frees memory allocated for stash

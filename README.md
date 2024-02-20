@@ -10,8 +10,7 @@ The get_next_line() function is designed to handle multiple file descriptors, al
 
 - **Line-by-Line Reading:** Implement sequential line-by-line reading to facilitate easy processing.
 - **Multiple File Descriptors:** Enable concurrent reading from multiple file descriptors.
-- **Dynamic Memory Allocation:** Efficiently manage memory using dynamic allocation for reading and storing lines.
-- **Persistent State Handling:** Utilize static variables for seamless continuation of line-by-line reading across successive calls to get_next_line().
+- **Persistent Line Reading:** Utilize static variables for seamless continuation of line-by-line reading across successive calls to get_next_line().
 - **Tailored Configuration:** Easily adjust buffer size and the maximum number of used file descriptors via compilation flags.
 - **Error Handling and Edge Cases:** Handle binary file reading logically to avoid undefined behavior.
 

@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:05 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/17 18:54:12 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/03/30 13:46:04 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 }
 
 /*
-Similar to ft_strjoin() of the libft library, but also manages:
--	Frees memory for 'stash' after being concatenated with 'buffer' in 'str'.
+Similar to ft_strjoin() of the libft library, but also frees memory
+for 'stash' after being concatenated with 'buffer' in 'str'.
 */
 char	*ft_stash_buf_join(char *stash, char *buffer)
 {

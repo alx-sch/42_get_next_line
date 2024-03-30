@@ -6,7 +6,7 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:02:36 by aschenk           #+#    #+#             */
-/*   Updated: 2024/01/19 18:00:56 by aschenk          ###   ########.fr       */
+/*   Updated: 2024/03/30 13:41:56 by aschenk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ to accommodate the Norm (max. number of functions).
 */
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void		*ptr;
+	void			*ptr;
 	unsigned char	*byte_ptr;
-	size_t		total_size;
+	size_t			total_size;
 
 	if (nmemb > 0)
 	{
@@ -122,7 +122,7 @@ Returns:
 */
 char	*ft_read_until_newline_or_eof(int fd, char *stash)
 {
-	int	bytes_read;
+	int		bytes_read;
 	char	*buffer;
 
 	if (!stash)

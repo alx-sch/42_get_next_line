@@ -59,7 +59,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 
 /*
 Similar to ft_strjoin() of the libft library, but also manages:
--	NULL input for 'stash' -> allocates memory for an empty string.
 -	Frees memory for 'stash' after being concatenated with 'buffer' in 'str'.
 */
 char	*ft_stash_buf_join(char *stash, char *buffer)

@@ -1,7 +1,7 @@
 # 42_get_next_line
 
 <p align="center">
-    <img src="https://github.com/alx-sch/42_get_next_line/assets/134595144/4c3cadb7-0375-4908-a67a-a90bd865ea6d" alt="get_next_line_badge.png" />
+    <img src="https://raw.githubusercontent.com/alx-sch/42_get_next_line/main/.assets/get_next_linee.png" alt="get_next_line_badge.png" />
 </p>
 
 The get_next_line() function is designed to handle multiple file descriptors, allowing to read lines one-by-one from different sources, only using static variables to keep track of read content between successive calls of get_next_line().

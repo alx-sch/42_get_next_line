@@ -31,7 +31,7 @@ The read() system call is a low-level function in C that allows a program to rea
     - **'-1'**: If an error occurs.
 
 ## Function Flowchart
-![flowchart_gnl](https://github.com/alx-sch/42_get_next_line/assets/134595144/b3c9fdb9-9c2f-44a1-aa2e-8242720cf183)
+![flowchart_gnl](https://raw.githubusercontent.com/alx-sch/42_get_next_line/main/.assets/gnl_flowchart.png)
 - **Implicit Elements:**
     - Helper functions (e.g. **ft_strlen()**, **ft_strlcat()**, **ft_strchr()**, as included in the [libft library](https://github.com/alx-sch/42_libft)) are not shown.
     - Error handling for null checks, including failed memory allocation, is not shown (returning NULL).

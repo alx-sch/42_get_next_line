@@ -81,7 +81,7 @@ int	ft_isbinary(char *stash)
 ```
 
 ## Avoiding Memory Leaks
-get_next_line() allocates memory for the line it returns, and it is the user's responsibility to free this memory before the program ends. Additionally, the read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks when the user is done reading lines, it is necessary to free the allocated memory for both the returned line and the 'stash'. This can be accomplished by extending the function's invalid input check to include appropriate memory deallocation, making a `get_next_line(-1)` call a command to free the 'stash':
+get_next_line() allocates memory for the line it returns, and it is the user's responsibility to free this memory before the program ends. Additionally, the read data between calls to get_next_line() is stored in the static variable 'stash'. To prevent memory leaks and still reachable pointers when the user is done reading lines, it is necessary to free the allocated memory for both the returned line and the 'stash'. This can be accomplished by extending the function's invalid input check to include appropriate memory deallocation, making a `get_next_line(-1)` call a command to free the 'stash':
 
 ```C
 // get_next_line.c
@@ -107,7 +107,45 @@ if (fd < 0 || BUFFER_SIZE <= 0)
 	return (NULL);
 }
 ```
-A short program that uses get_next_line() and frees all allocated memory:
+A short program that uses `get_next_line(-1)` to free the stash:
+```C
+#include <stdio.h> // printf()
+#include <fcntl.h> // open()
+#include <unistd.h> // read(), write(), close()
+#include <stdlib.h> // malloc(), free()
+
+int	main(void)
+{
+	int	fd;
+	char	*line;
+
+	fd = open("file.txt", O_RDONLY);
+	if (fd == -1)
+		return (1);
+
+	line = get_next_line(fd) // Read first line from file.txt
+	printf("-->%s\n", line);
+	free(line); // Free memory allocated for the extracted line
+
+	get_next_line(-1); // Free memory allocated for the stash
+	close(fd);
+
+	return (0);
+}
+```
+
+Alternatively or additionally, you can keep reading lines via get_next_line calls until the EOF of the file is reached, ensuring that the stash is properly freed both in cases of errors and when the end of the file is encountered:
+```C
+// get_next_line.c
+bytes_read = read(fd, buffer, BUFFER_SIZE);
+if (bytes_read == -1)
+{
+	free(stash);
+	free(buffer);
+	return (NULL);
+}
+```
+A short program that uses get_next_line() until the file's EOF is reached, making sure to free the stash properly:
 ```C
 #include <stdio.h> // printf()
 #include <fcntl.h> // open()
@@ -129,8 +167,8 @@ int	main(void)
 		free(line); // Free memory allocated for the extracted line
 	}
 
+	// Once EOF is reached, get_next_line will have already freed the stash, no additional action required
 	close(fd);
-	get_next_line(-1); // Free memory allocated for the stash
 
 	return (0);
 }
@@ -141,7 +179,6 @@ Use Valgrind, a memory analysis tool, to detect memory leaks in your program: `v
 Due to the project's strict specifications, get_next_line() is designed to either return the read line or NULL for all other cases, making it impossible to differentiate between reaching the EOF and errors.
 
 For future implementations of get_next_line(), I would update the function prototype from `char *get_next_line(int fd)` to `int get_next_line(int fd, char **line)` to overcome these limitations in error handling. This modification enables the return value to signify various cases (e.g., '1' for success, '0' for EOF, '-1' for invalid input, '-2' for binary data, '-3' for failed memory allocation, etc.). Additionally, integrating error messages within the get_next_line functions would enhance user understanding by providing more detailed information.
-
 
 ```C
 #include <stdio.h> // printf()

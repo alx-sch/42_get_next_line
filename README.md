@@ -251,4 +251,4 @@ Try out the following:
 
 ## Acknowledgements  
 - Some of the test files were retrieved from Fabricio Soares' [testing framework](https://github.com/xicodomingues/francinette/tree/master/tests/get_next_line/fsoares).   
-- The project badge used is retrieved from [this repo](https://github.com/ayogun/42-project-badges) by Ali Ogun.
+- The project badge is from [this repository](https://github.com/ayogun/42-project-badges) by Ali Ogun.
